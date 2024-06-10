@@ -104,80 +104,59 @@ const formOrderFunctions = {
     "random": (questions) => questions.sort(() => Math.random() - 0.5),
 }
 const formType = formTypes[Math.floor(Math.random() * formTypes.length)];
-
 const orderedQuestions = formOrderFunctions[formType](questions);
-
 const baseUrl = `https://docs.google.com/forms/d/e/1FAIpQLScOIicBUGYizF1gb4vzxZVbZIBWUot4C8XQrafn0p0UP6zJIg/formResponse?usp=pp_url&submit=Submit&entry.667455850=${formType}`;
 
-const clicks = [{
-    q: -1,
-    a: -1,
-    c: -1,
-    x: -1,
-    y: -1,
-    d: new Date(),
-}];
+const clicks = [{ q: -1, a: -1, c: -1, x: -1, y: -1, d: new Date() }];
 const clickEntry = "entry.1947159382";
 
 document.addEventListener("DOMContentLoaded", () => {
     const div = document.getElementById("asrsForm");
-
     const table = document.createElement("table");
     const thead = document.createElement("thead");
-    const theadTr = document.createElement("tr");
-    theadTr.append(
-        ...["Questions", ...questionOptions].map(text => {
-            const th = document.createElement("th");
-            th.setAttribute("scope", "col");
-            th.innerText = text;
-            return th;
-        })
-    )
-    thead.appendChild(theadTr);
+    const tr = document.createElement("tr");
+    ["Questions", ...questionOptions].forEach(text => {
+        const th = document.createElement("th");
+        th.setAttribute("scope", "col");
+        th.innerText = text;
+        tr.appendChild(th);
+    });
+    thead.appendChild(tr);
     table.appendChild(thead);
 
     const tbody = document.createElement("tbody");
-    const tr = document.createElement("tr");
-    const th = document.createElement("th");
-    th.innerText = "Part A";
-    tr.appendChild(th);
-    tbody.appendChild(tr);
+    appendPartHeader(tbody, "Part A");
 
-    for (let i = 0; i < orderedQuestions.length; i++) {
-        if (i === partALength) {
-            const tr = document.createElement("tr");
-            const th = document.createElement("th");
-            th.innerText = "Part B";
-            tr.appendChild(th);
-            tbody.appendChild(tr);
-        }
-
+    orderedQuestions.forEach((question, i) => {
+        if (i === partALength)
+            appendPartHeader(tbody, "Part B");
         const tr = document.createElement("tr");
         const th = document.createElement("th");
         th.setAttribute("scope", "row");
-        th.innerText = orderedQuestions[i].question;
+        th.innerText = question.question;
         tr.appendChild(th);
-        for (let j = 0; j < questionOptions.length; j++) {
+
+        questionOptions.forEach((_, j) => {
             const td = document.createElement("td");
-            const input = document.createElement("input");
-            if (orderedQuestions[i].highlighted && orderedQuestions[i].highlighted.includes(j) && formType === "normal")
+            if (formType === "normal" && question.highlighted.includes(j))
                 td.classList.add("highlighted");
-            input.setAttribute("type", "radio");
-            input.setAttribute("name", `question${i}`);
-            input.setAttribute("value", j);
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `question${i}`;
+            input.value = j;
             td.appendChild(input);
             tr.appendChild(td);
-        }
+        });
+
         tbody.appendChild(tr);
-    }
+    });
     table.appendChild(tbody);
     div.appendChild(table);
 
-    const submitButton = document.createElement("button");
-    submitButton.innerText = "Submit";
-    submitButton.addEventListener("click", () => {
-        const inputs = document.querySelectorAll("input");
-        const selected = Array.from(inputs).filter(input => input.checked);
+    const button = document.createElement("button");
+    button.innerText = "Submit";
+    button.addEventListener("click", (e) => {
+        const selected = Array.from(document.querySelectorAll("input:checked"));
         if (selected.length !== orderedQuestions.length) {
             alert("Please answer all questions");
             return;
@@ -191,16 +170,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const clicksString = clicks.map(click => {
             return `${click.q},${click.a},${click.c},${click.x},${click.y},${click.d.toISOString()}`;
         }).join("|");
-        
-        const url = `${baseUrl}&${entries.join("&")}&${clickEntry}=${encodeURIComponent(clicksString)}`;
-        window
-            .open(url, "_blank")
-            .focus();
 
+        const url = `${baseUrl}&${entries.join("&")}&${clickEntry}=${encodeURIComponent(clicksString)}`;
+        window.open(url, "_blank").focus();
         window.location.reload();
     });
-    div.appendChild(submitButton);
+    div.appendChild(button);
 
+    // TODO: Delete this after development
     const typeDiv = document.createElement("div");
     typeDiv.innerText = `Form type: ${formType}`;
     div.appendChild(typeDiv);
@@ -208,9 +185,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("click", (e) => {
     const clickDate = new Date();
-    const question = e.target?.closest("tr")?.querySelector("th")?.innerText || "N/A";
+    const question = e.target.closest("tr")?.querySelector("th")?.innerText || "N/A";
     const questionIndex = questions.findIndex(q => q.question === question);
-    const answerElement = e.target?.closest("td")?.querySelector("input");
+    const answerElement = e.target.closest("td")?.querySelector("input");
     const answer = answerElement?.value || -1;
     clicks.push({
         q: questionIndex,
@@ -221,3 +198,11 @@ document.addEventListener("click", (e) => {
         d: clickDate,
     });
 });
+
+function appendPartHeader(tbody, partName) {
+    const tr = document.createElement("tr");
+    const th = document.createElement("th");
+    th.innerText = partName;
+    tr.appendChild(th);
+    tbody.appendChild(tr);
+}
