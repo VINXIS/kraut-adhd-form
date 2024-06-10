@@ -1,0 +1,17 @@
+{
+  "name": "kraut-adhd-form",
+  "version": "1.0.0",
+  "description": "Customized form for Dr. Roni Kraut's ADHD form research",
+  "scripts": {
+    "gulp": "gulp"
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "devDependencies": {
+    "gulp": "^5.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-terser": "^2.1.0"
+  }
+}
