@@ -109,10 +109,19 @@ const orderedQuestions = formOrderFunctions[formType](questions);
 
 const baseUrl = `https://docs.google.com/forms/d/e/1FAIpQLScOIicBUGYizF1gb4vzxZVbZIBWUot4C8XQrafn0p0UP6zJIg/formResponse?usp=pp_url&submit=Submit&entry.667455850=${formType}`;
 
+const clicks = [{
+    q: "N/A",
+    a: "N/A",
+    c: "N/A",
+    x: "N/A",
+    y: "N/A",
+    d: new Date(),
+}];
+const clickEntry = "entry.1947159382";
+
 document.addEventListener("DOMContentLoaded", () => {
     const div = document.getElementById("asrsForm");
 
-    // Create a 6 column grid/table. First column has the question, the rest 5 have options of Never, Rarely, Sometimes, Often, Very Often. Have the first 6 questions in part A, and the rest in part B.
     const table = document.createElement("table");
     const thead = document.createElement("thead");
     const theadTr = document.createElement("tr");
@@ -133,6 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
     th.innerText = "Part A";
     tr.appendChild(th);
     tbody.appendChild(tr);
+
     for (let i = 0; i < orderedQuestions.length; i++) {
         if (i === partALength) {
             const tr = document.createElement("tr");
@@ -166,10 +176,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const submitButton = document.createElement("button");
     submitButton.innerText = "Submit";
     submitButton.addEventListener("click", () => {
-        // Ensure every row has an option selected, and then add each entry alongside the selected value to the URL, and then redirect to that URL.
         const inputs = document.querySelectorAll("input");
         const selected = Array.from(inputs).filter(input => input.checked);
-        console.log(inputs);
         if (selected.length !== orderedQuestions.length) {
             alert("Please answer all questions");
             return;
@@ -177,10 +185,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const entries = selected.map((input, i) => {
             const question = orderedQuestions[i];
-            return `${question.entry}=${questionOptions[input.value]}`;
+            return `${question.entry}=${encodeURIComponent(questionOptions[input.value])}`;
         });
+
+        const clicksString = clicks.map(click => {
+            return `${click.q},${click.a},${click.c},${click.x},${click.y},${click.d.toISOString()}`;
+        }).join("|");
         
-        const url = `${baseUrl}&${entries.join("&")}`;
+        const url = `${baseUrl}&${entries.join("&")}&${clickEntry}=${encodeURIComponent(clicksString)}`;
         window
             .open(url, "_blank")
             .focus();
@@ -192,4 +204,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const typeDiv = document.createElement("div");
     typeDiv.innerText = `Form type: ${formType}`;
     div.appendChild(typeDiv);
+});
+
+document.addEventListener("click", (e) => {
+    const clickDate = new Date();
+    const question = e.target?.closest("tr")?.querySelector("th")?.innerText || "N/A";
+    const answerElement = e.target?.closest("td")?.querySelector("input");
+    const answer = answerElement?.value || "N/A";
+    clicks.push({
+        q: question,
+        a: answer,
+        c: typeof answerElement?.checked === "boolean" ? answerElement.checked : "N/A",
+        x: e.clientX,
+        y: e.clientY,
+        d: clickDate,
+    });
 });
