@@ -110,11 +110,11 @@ const orderedQuestions = formOrderFunctions[formType](questions);
 const baseUrl = `https://docs.google.com/forms/d/e/1FAIpQLScOIicBUGYizF1gb4vzxZVbZIBWUot4C8XQrafn0p0UP6zJIg/formResponse?usp=pp_url&submit=Submit&entry.667455850=${formType}`;
 
 const clicks = [{
-    q: "N/A",
-    a: "N/A",
-    c: "N/A",
-    x: "N/A",
-    y: "N/A",
+    q: -1,
+    a: -1,
+    c: -1,
+    x: -1,
+    y: -1,
     d: new Date(),
 }];
 const clickEntry = "entry.1947159382";
@@ -209,12 +209,13 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("click", (e) => {
     const clickDate = new Date();
     const question = e.target?.closest("tr")?.querySelector("th")?.innerText || "N/A";
+    const questionIndex = questions.findIndex(q => q.question === question);
     const answerElement = e.target?.closest("td")?.querySelector("input");
-    const answer = answerElement?.value || "N/A";
+    const answer = answerElement?.value || -1;
     clicks.push({
-        q: question,
+        q: questionIndex,
         a: answer,
-        c: typeof answerElement?.checked === "boolean" ? answerElement.checked : "N/A",
+        c: typeof answerElement?.checked === "boolean" ? answerElement.checked | 0 : -1,
         x: e.clientX,
         y: e.clientY,
         d: clickDate,
