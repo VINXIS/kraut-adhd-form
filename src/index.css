@@ -13,11 +13,24 @@ th, td {
     border: 1px solid black;
 }
 
-input {
-    display: block;
-    margin: auto;
+input[type="radio"], input[type="checkbox"] {
     width: 1rem;
     height: 1rem;
+}
+
+td > input {
+    display: block;
+    margin: auto;
+}
+
+.flexbox {
+    display: flex;
+    flex-direction: column;
+}
+
+#buttons {
+    display: flex;
+    justify-content: space-between;
 }
 
 .highlighted {
