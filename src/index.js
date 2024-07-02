@@ -1,105 +1,170 @@
+const demographicsQuestions = [
+    {
+        question: "Year of birth:",
+        inputName: "yob",
+        inputType: "number",
+        entry: "entry.820934355",
+    },
+    {
+        question: "Gender Identity",
+        inputName: "gender",
+        inputType: "radio",
+        entry: "entry.892949306",
+    },
+    {
+        question: "Level of Education",
+        inputName: "education",
+        inputType: "radio",
+        entry: "entry.128715196",
+    },
+    {
+        question: "Have you been diagnosed with ADHD?",
+        inputName: "diagnosedADHD",
+        inputType: "radio",
+        entry: "entry.1763651793",
+    },
+    {
+        question: "Who diagnosed you with ADHD?",
+        inputName: "diagnosedBy",
+        inputType: "radio",
+        entry: "entry.648625715",
+    },
+    {
+        question: "In which year were you diagnosed with ADHD?",
+        inputName: "yod",
+        inputType: "number",
+        entry: "entry.1526675713",
+    },
+    {
+        question: "What methods were used to diagnose for ADHD? (Check all that apply)",
+        inputName: "diagnosedMethod",
+        inputType: "checkbox",
+        entry: "entry.63037250",
+    },
+    {
+        question: "Are you currently taking your ADHD medication regularly (more than 3 days/week in the past 2 weeks)?",
+        inputName: "takingMedication",
+        inputType: "radio",
+        entry: "entry.844708561",
+    },
+    {
+        question: "Do you suspect you may have ADHD?",
+        inputName: "suspectADHD",
+        inputType: "radio",
+        entry: "entry.1550574022",
+    },
+    {
+        question: "Why do you suspect you may have ADHD?",
+        inputName: "whySuspectADHD",
+        inputType: "textarea",
+        entry: "entry.698666662",
+    }
+]
+
 const asisQuestions = [{
     question: "I regularly hit “reply all” by mistake for e-mails",
-    entry: ""
+    entry: "entry.1180294866"
   }, {
     question: "I avoid nice restaurants because meals take too long",
-    entry: ""
+    entry: "entry.1729376175"
   }, {
     question: "I have so much energy, I sometimes have trouble catching my breath",
-    entry: ""
+    entry: "entry.1012025606"
   }, {
     question: "I often burn food when cooking because I forget about it",
-    entry: ""
+    entry: "entry.1606171849"
   }, {
     question: "I’m good at keeping secrets",
-    entry: ""
+    entry: "entry.433009121"
   }, {
     question: "I sometimes enjoy quiet time",
-    entry: ""
+    entry: "entry.327099982"
   }, {
     question: "I would pass up a very high paying job if it required me to sit at a desk all day ",
-    entry: ""
+    entry: "entry.1253157306"
   }, {
     question: "I can typically find things in my own home",
-    entry: ""
+    entry: "entry.194936679"
   }, {
     question: "When I have a big decision, I prefer to take time to think about it",
-    entry: ""
+    entry: "entry.342717729"
   }, {
     question: "People seem to think I am a good listener",
-    entry: ""
+    entry: "entry.937639672"
   }, {
     question: "Most of the time I can engage in uninterrupted pleasurable activity",
-    entry: ""
+    entry: "entry.186469105"
   }, {
     question: "I feel I am a good judge of character",
-    entry: ""
+    entry: "entry.586368867"
   }, {
     question: "I’m an impulsive buyer",
-    entry: ""
+    entry: "entry.394013469"
   }, {
     question: "I regularly get distracted by the teacher in class",
-    entry: ""
+    entry: "entry.830652180"
   }, {
     question: "People say that I am generally helpful",
-    entry: ""
+    entry: "entry.1526792226"
   }, {
     question: "I frequently send e-mails to the wrong person by mistake",
-    entry: ""
+    entry: "entry.1728251790"
   }, {
     question: "I frequently offend people",
-    entry: ""
+    entry: "entry.1096044739"
   }, {
     question: "People think I am too loud at parties",
-    entry: ""
+    entry: "entry.1355664473"
   }, {
     question: "When I have a big decision, I like to take time to think about it",
-    entry: ""
+    entry: "entry.1425883855"
   }, {
     question: "People think that I am caring",
-    entry: ""
+    entry: "entry.1091569406"
   }, {
     question: "I am the most talkative person I know",
-    entry: ""
+    entry: "entry.1607619617"
   }, {
     question: "I am sensitive to other people’s needs",
-    entry: ""
+    entry: "entry.50312923"
   }, {
     question: "I forget to tie my shoes",
-    entry: ""
+    entry: "entry.1677265166"
   }, {
     question: "I often hit “reply all” by mistake for e-mails",
-    entry: ""
+    entry: "entry.941816539"
   }, {
     question: "I sometimes speak slowly when trying to think of something to say",
-    entry: ""
+    entry: "entry.1026495874"
   }, {
     question: "People say that I am usually helpful",
-    entry: ""
+    entry: "entry.968600294"
   }, {
     question: "People think I am a good listener",
-    entry: ""
+    entry: "entry.371954748"
   }, {
     question: "I’m empathetic to the needs of others",
-    entry: ""
+    entry: "entry.1207378031"
   }, {
     question: "I would not pass up a high paying job if it required me to sit at a desk all day",
-    entry: ""
+    entry: "entry.516189164"
   }, {
     question: "I am unable to watch my favorite TV show without taking a break",
-    entry: ""
+    entry: "entry.1846961360"
   }, {
     question: "I frequently miss a button when putting on a shirt",
-    entry: ""
+    entry: "entry.193984427"
   }, {
     question: "I rarely forget to tie my shoes",
-    entry: ""
+    entry: "entry.1661073800"
   }, {
     question: "I am good at keeping secrets",
-    entry: ""
+    entry: "entry.2013640086"
   }];
 function createAsisForm() {
     const div = document.getElementById("asisForm");
+    const form = document.createElement("form");
+    form.setAttribute("id", "asisQuestions");
     const table = document.createElement("table");
     const thead = document.createElement("thead");
     const tr = document.createElement("tr");
@@ -120,12 +185,12 @@ function createAsisForm() {
         th.innerText = question.question;
         tr.appendChild(th);
 
-        ["True", "False"].forEach((text, j) => {
+        ["True", "False"].forEach((text) => {
             const td = document.createElement("td");
             const input = document.createElement("input");
             input.type = "radio";
             input.name = `question${i}`;
-            input.value = j;
+            input.value = text;
             td.appendChild(input);
             tr.appendChild(td);
         });
@@ -133,7 +198,8 @@ function createAsisForm() {
         tbody.appendChild(tr);
     });
     table.appendChild(tbody);
-    div.appendChild(table);    
+    form.appendChild(table);
+    div.appendChild(form);    
 }
 
 const asrsQuestions = [
@@ -244,6 +310,8 @@ const asrsFormType = asrsFormTypes[Math.floor(Math.random() * asrsFormTypes.leng
 const asrsOrderedQuestions = asrsFormOrderFunctions[asrsFormType](asrsQuestions);
 function createAsrsForm() {
     const div = document.getElementById("asrsForm");
+    const form = document.createElement("form");
+    form.setAttribute("id", "asrsQuestions");
     const table = document.createElement("table");
     const thead = document.createElement("thead");
     const tr = document.createElement("tr");
@@ -283,7 +351,8 @@ function createAsrsForm() {
         tbody.appendChild(tr);
     });
     table.appendChild(tbody);
-    div.appendChild(table);
+    form.appendChild(table);
+    div.appendChild(form);
 
     // TODO: Delete this after development
     const typeDiv = document.createElement("div");
@@ -291,7 +360,8 @@ function createAsrsForm() {
     div.appendChild(typeDiv);
 }
 
-const baseUrl = `https://docs.google.com/forms/d/e/1FAIpQLScOIicBUGYizF1gb4vzxZVbZIBWUot4C8XQrafn0p0UP6zJIg/formResponse?usp=pp_url&submit=Submit&entry.667455850=${asrsFormType}`;
+const declinedUrl = `https://docs.google.com/forms/d/e/1FAIpQLScOIicBUGYizF1gb4vzxZVbZIBWUot4C8XQrafn0p0UP6zJIg/formResponse?usp=pp_url&submit=Submit&entry.1330571429=No`;
+const baseUrl = `https://docs.google.com/forms/d/e/1FAIpQLScOIicBUGYizF1gb4vzxZVbZIBWUot4C8XQrafn0p0UP6zJIg/formResponse?usp=pp_url&submit=Submit&entry.1330571429=Yes&entry.667455850=${asrsFormType}`;
 
 const clicks = [{ p: -1, q: -1, a: -1, c: -1, x: -1, y: -1, d: new Date() }];
 const clickEntry = "entry.1947159382";
@@ -304,34 +374,62 @@ function createButton(text, clickHandler) {
     return button;
 }
 
+const submitButton = createButton("Submit", (e) => {
+    const demographicsForm = document.getElementById("demographics");
+    const demographicsEntries = demographicsQuestions.map(question => {
+        if (question.inputType !== "checkbox") {
+            const input = demographicsForm[question.inputName]; 
+            return input.value ? `${question.entry}=${encodeURIComponent(input.value)}` : "";
+        }
+        const inputs = Array.from(demographicsForm[question.inputName]);
+        return inputs.map(input => {
+            return input.checked ? `${question.entry}=${encodeURIComponent(input.value)}` : "";
+        }).filter(entry => entry !== "");
+    }).filter(entry => entry !== "").flat();
+
+    const asisQuestionsForm = document.getElementById("asisQuestions");
+    const asisSelected = Array.from(asisQuestionsForm.querySelectorAll("input:checked"));
+    if (asisSelected.length !== asisQuestions.length) {
+        alert("Please answer all ASIS questions");
+        return;
+    }
+    
+    const asrsQuestionsForm = document.getElementById("asrsQuestions");
+    const asrsSelected = Array.from(asrsQuestionsForm.querySelectorAll("input:checked"));
+    if (asrsSelected.length !== asrsOrderedQuestions.length) {
+        alert("Please answer all ASRS questions");
+        return;
+    }
+
+    const entries = [
+        ...demographicsEntries,
+        ...asisSelected.map((input, i) => {
+            const question = asisQuestions[i];
+            return `${question.entry}=${encodeURIComponent(input.value)}`;
+        }),
+        ...asrsSelected.map((input, i) => {
+            const question = asrsOrderedQuestions[i];
+            return `${question.entry}=${encodeURIComponent(asrsQuestionOptions[input.value])}`;
+        })
+    ];
+
+    const clicksString = clicks.map(click => {
+        return `${click.p},${click.q},${click.a},${click.c},${click.x},${click.y},${click.d.toISOString()}`;
+    }).join("|");
+
+    const url = `${baseUrl}&${entries.join("&")}&${clickEntry}=${encodeURIComponent(clicksString)}`;
+    window.open(url, "_blank").focus();
+    window.location.reload();
+});
+
 function resetNavButtons() {
     const buttons = document.getElementById("buttons");
     buttons.innerHTML = "";
     buttons.appendChild(createButton("Previous", (e) => pageHandler(-1)));
     if (page !== 3)
         buttons.appendChild(createButton("Next", (e) => pageHandler(1)));
-    if (page === 3) {
-        buttons.appendChild(createButton("Submit", (e) => {
-            const selected = Array.from(document.querySelectorAll("input:checked"));
-            if (selected.length !== asrsOrderedQuestions.length) {
-                alert("Please answer all questions");
-                return;
-            }
-    
-            const entries = selected.map((input, i) => {
-                const question = asrsOrderedQuestions[i];
-                return `${question.entry}=${encodeURIComponent(asrsQuestionOptions[input.value])}`;
-            });
-    
-            const clicksString = clicks.map(click => {
-                return `${click.p},${click.q},${click.a},${click.c},${click.x},${click.y},${click.d.toISOString()}`;
-            }).join("|");
-    
-            const url = `${baseUrl}&${entries.join("&")}&${clickEntry}=${encodeURIComponent(clicksString)}`;
-            window.open(url, "_blank").focus();
-            window.location.reload();
-        }));
-    }
+    if (page === 3)
+        buttons.appendChild(submitButton);
 }
 
 let page = 0;
@@ -375,4 +473,12 @@ function appendPartHeader(tbody, partName) {
     th.innerText = `\n${partName}`;
     tr.appendChild(th);
     tbody.appendChild(tr);
+}
+
+function ignoreForm() {
+    if (!confirm("THIS IS ONLY FOR MEDICAL STAFF/ASSISTANTS.\n\nAre you sure you want to confirm form decline?"))
+        return;
+
+    window.open(declinedUrl, "_blank").focus();
+    window.location.reload();
 }

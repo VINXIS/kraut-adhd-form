@@ -11,7 +11,7 @@
     <div id="frontSection">
         <h1>ADHD Research Form</h1>
         <p><b>Title of the study:</b> Comparison of ADHD screening forms</p>
-        <p><b>Principal Investigators:</b> Roni Kraut, MD, CCFP<br>Assistant Professor, University of Alberta<br>(780) 487-7713<br><br>Oksana Babenko, PhD<br>Associate Professor, University of Alberta<br>(780) 248-1729</p>
+        <p><b>Principal Investigators:</b><br>Roni Kraut, MD, CCFP<br>Assistant Professor, University of Alberta<br>(780) 487-7713<br><br>Oksana Babenko, PhD<br>Associate Professor, University of Alberta<br>(780) 248-1729</p>
         <p><b>Invitation to participate:</b> You are invited to participate in this research study because you are attending an appointment at Shifa Medical Clinic.</p>
         <p><b>Purpose of the Study:</b> There are several screening forms available for ADHD. From this research we wish to determine the screen positive rate among different ADHD screening forms.</p>
         <p><b>Participation:</b> If you wish to participate in this study, please complete the survey. The survey should take you approximately 5 minutes to complete. You do not have to answer any questions that you do not want to answer. Once you have completed the survey, please return the tablet to the receptionist.</p>
@@ -31,28 +31,28 @@
         <form id="demographics">
             <h1>Demographics Questions</h1>
             <label for="yob">Year of Birth:</label>
-            <input type="number" id="yob" name="yob">
+            <input type="number" id="yob" name="yob" min="1900" max="2024" placeholder="1900">
             <hr>
             <p>Gender Identity</p>
             <div class="flexbox">
                 <div>
-                    <input type="radio" name="gender" id="male" value="male">
+                    <input type="radio" name="gender" id="male" value="Male">
                     <label for="male">Male</label>
                 </div>
                 <div>
-                    <input type="radio" name="gender" id="female" value="female">
+                    <input type="radio" name="gender" id="female" value="Female">
                     <label for="female">Female</label>
                 </div>
                 <div>
-                    <input type="radio" name="gender" id="nonbinary" value="nonbinary">
+                    <input type="radio" name="gender" id="nonbinary" value="Non-binary">
                     <label for="nonbinary">Non-binary</label>
                 </div>
                 <div>
-                    <input type="radio" name="gender" id="transgender" value="transgender">
+                    <input type="radio" name="gender" id="transgender" value="Transgender">
                     <label for="transgender">Transgender</label>
                 </div>
                 <div>
-                    <input type="radio" name="gender" id="noAnswerGender" value="noAnswerGender">
+                    <input type="radio" name="gender" id="noAnswerGender" value="Prefer not to answer">
                     <label for="noAnswerGender">Prefer not to answer</label>
                 </div>
                 <div>
@@ -64,15 +64,15 @@
             <p>Level of Education</p>
             <div class="flexbox">
                 <div>
-                    <input type="radio" name="education" id="highschool" value="highschool">
+                    <input type="radio" name="education" id="highschool" value="High school diploma, or equivalent">
                     <label for="highschool">High school diploma, or equivalent</label>
                 </div>
                 <div>
-                    <input type="radio" name="education" id="postsec" value="postsec">
-                    <label for="postsec">Post-secondary (ex.university, college), some or completed</label>
+                    <input type="radio" name="education" id="postsec" value="Post-secondary (ex. university, college), some or completed">
+                    <label for="postsec">Post-secondary (ex. university, college), some or completed</label>
                 </div>
                 <div>
-                    <input type="radio" name="education" id="graduate" value="graduate">
+                    <input type="radio" name="education" id="graduate" value="Professional/Graduate degree (ex. MA, MSc, PhD), some or completed">
                     <label for="graduate">Professional/Graduate degree (ex. MA, MSc, PhD), some  or completed</label>
                 </div>
                 <div>
@@ -84,11 +84,11 @@
             <p>Have you been diagnosed with ADHD?</p>
             <div class="flexbox">
                 <div>
-                    <input type="radio" name="diagnosedADHD" id="yesADHD" value="true">
+                    <input type="radio" name="diagnosedADHD" id="yesADHD" value="Yes">
                     <label for="yesADHD">Yes</label>
                 </div>
                 <div>
-                    <input type="radio" name="diagnosedADHD" id="noADHD" value="false">
+                    <input type="radio" name="diagnosedADHD" id="noADHD" value="No">
                     <label for="noADHD">No</label>
                 </div>
                 <div>
@@ -101,15 +101,15 @@
                 <p>Who diagnosed you with ADHD?</p>
                 <div class="flexbox">
                     <div>
-                        <input type="radio" name="diagnosedBy" id="familyPhys" value="familyPhys">
+                        <input type="radio" name="diagnosedBy" id="familyPhys" value="Family Physician">
                         <label for="familyPhys">Family Physician</label>
                     </div>
                     <div>
-                        <input type="radio" name="diagnosedBy" id="psychiatrist" value="psychiatrist">
+                        <input type="radio" name="diagnosedBy" id="psychiatrist" value="Psychiatrist">
                         <label for="psychiatrist">Psychiatrist</label>
                     </div>
                     <div>
-                        <input type="radio" name="diagnosedBy" id="psychologist" value="psychologist">
+                        <input type="radio" name="diagnosedBy" id="psychologist" value="Psychologist">
                         <label for="psychologist">Psychologist</label>
                     </div>
                     <div>
@@ -119,20 +119,20 @@
                 </div>
                 <hr>
                 <label for="yod">In which year were you diagnosed with ADHD?</label>
-                <input type="number" id="yod" name="yod">
+                <input type="number" id="yod" name="yod" min="1900" max="2024" placeholder="1900">
                 <hr>
                 <p>What methods were used to diagnose for ADHD? (Check all that apply)</p>
                 <div class="flexbox">
                     <div>
-                        <input type="checkbox" name="diagnosedMethod" id="interview" value="interview">
+                        <input type="checkbox" name="diagnosedMethod" id="interview" value="Interview">
                         <label for="interview">Interview</label>
                     </div>
                     <div>
-                        <input type="checkbox" name="diagnosedMethod" id="cognitive" value="cognitive">
+                        <input type="checkbox" name="diagnosedMethod" id="cognitive" value="Cognitive Testing">
                         <label for="cognitive">Cognitive Testing</label>
                     </div>
                     <div>
-                        <input type="checkbox" name="diagnosedMethod" id="screening" value="screening">
+                        <input type="checkbox" name="diagnosedMethod" id="screening" value="ADHD Screening form">
                         <label for="screening">ADHD Screening form</label>
                     </div>
                 </div>
@@ -140,11 +140,11 @@
                 <p>Are you currently taking your ADHD medication regularly (more than 3 days/week in the past 2 weeks)?</p>
                 <div class="flexbox">
                     <div>
-                        <input type="radio" name="takingMedication" id="yesMedication" value="true">
+                        <input type="radio" name="takingMedication" id="yesMedication" value="Yes">
                         <label for="yesMedication">Yes</label>
                     </div>
                     <div>
-                        <input type="radio" name="takingMedication" id="noMedication" value="false">
+                        <input type="radio" name="takingMedication" id="noMedication" value="No">
                         <label for="noMedication">No</label>
                     </div>
                     <div>
@@ -157,19 +157,19 @@
                 <p>Do you suspect you may have ADHD?</p>
                 <div class="flexbox">
                     <div>
-                        <input type="radio" name="suspectADHD" id="veryUnlikelyADHD" value="veryUnlikely">
+                        <input type="radio" name="suspectADHD" id="veryUnlikelyADHD" value="Very unlikely">
                         <label for="veryUnlikelyADHD">Very unlikely</label>
                     </div>
                     <div>
-                        <input type="radio" name="suspectADHD" id="unlikelyADHD" value="unlikely">
+                        <input type="radio" name="suspectADHD" id="unlikelyADHD" value="Unlikely">
                         <label for="unlikelyADHD">Unlikely</label>
                     </div>
                     <div>
-                        <input type="radio" name="suspectADHD" id="likelyADHD" value="likely">
+                        <input type="radio" name="suspectADHD" id="likelyADHD" value="Likely">
                         <label for="likelyADHD">Likely</label>
                     </div>
                     <div>
-                        <input type="radio" name="suspectADHD" id="veryLikelyADHD" value="veryLikely">
+                        <input type="radio" name="suspectADHD" id="veryLikelyADHD" value="Very likely">
                         <label for="veryLikelyADHD">Very likely</label>
                     </div>
                 </div>
@@ -194,5 +194,6 @@
     <div id="buttons">
 
     </div>
+    <input class="redButton" type="button" value="IGNORE THIS BUTTON" onclick="ignoreForm()">
 </body>
 </html>
