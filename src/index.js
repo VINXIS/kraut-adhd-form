@@ -110,7 +110,57 @@ const baseUrl = `https://docs.google.com/forms/d/e/1FAIpQLScOIicBUGYizF1gb4vzxZV
 const clicks = [{ q: -1, a: -1, c: -1, x: -1, y: -1, d: new Date() }];
 const clickEntry = "entry.1947159382";
 
-document.addEventListener("DOMContentLoaded", () => {
+function createButton(text, clickHandler) {
+    const button = document.createElement("button");
+    button.innerText = text;
+    button.addEventListener("click", clickHandler);
+    button.disabled = text === "Previous" && page === 0;
+    return button;
+}
+
+function resetNavButtons () {
+    const buttons = document.getElementById("buttons");
+    buttons.innerHTML = "";
+    buttons.appendChild(createButton("Previous", (e) => pageHandler(-1)));
+    if (page !== 3)
+        buttons.appendChild(createButton("Next", (e) => pageHandler(1)));
+    if (page === 3) {
+        buttons.appendChild(createButton("Submit", (e) => {
+            const selected = Array.from(document.querySelectorAll("input:checked"));
+            if (selected.length !== orderedQuestions.length) {
+                alert("Please answer all questions");
+                return;
+            }
+    
+            const entries = selected.map((input, i) => {
+                const question = orderedQuestions[i];
+                return `${question.entry}=${encodeURIComponent(questionOptions[input.value])}`;
+            });
+    
+            const clicksString = clicks.map(click => {
+                return `${click.q},${click.a},${click.c},${click.x},${click.y},${click.d.toISOString()}`;
+            }).join("|");
+    
+            const url = `${baseUrl}&${entries.join("&")}&${clickEntry}=${encodeURIComponent(clicksString)}`;
+            window.open(url, "_blank").focus();
+            window.location.reload();
+        }));
+    }
+}
+
+let page = 0;
+const pageDivIDS = ["frontSection", "demographicsForm", "asisForm", "asrsForm"];
+function pageHandler(number) {
+    page = Math.max(0, page + number);
+    resetNavButtons();
+
+    for (let i = 0; i < pageDivIDS.length; i++) {
+        const div = document.getElementById(pageDivIDS[i]);
+        div.style.display = i === page ? "block" : "none";
+    }
+}
+
+function createAsrsForm () {
     const div = document.getElementById("asrsForm");
     const table = document.createElement("table");
     const thead = document.createElement("thead");
@@ -153,34 +203,15 @@ document.addEventListener("DOMContentLoaded", () => {
     table.appendChild(tbody);
     div.appendChild(table);
 
-    const button = document.createElement("button");
-    button.innerText = "Submit";
-    button.addEventListener("click", (e) => {
-        const selected = Array.from(document.querySelectorAll("input:checked"));
-        if (selected.length !== orderedQuestions.length) {
-            alert("Please answer all questions");
-            return;
-        }
-
-        const entries = selected.map((input, i) => {
-            const question = orderedQuestions[i];
-            return `${question.entry}=${encodeURIComponent(questionOptions[input.value])}`;
-        });
-
-        const clicksString = clicks.map(click => {
-            return `${click.q},${click.a},${click.c},${click.x},${click.y},${click.d.toISOString()}`;
-        }).join("|");
-
-        const url = `${baseUrl}&${entries.join("&")}&${clickEntry}=${encodeURIComponent(clicksString)}`;
-        window.open(url, "_blank").focus();
-        window.location.reload();
-    });
-    div.appendChild(button);
-
     // TODO: Delete this after development
     const typeDiv = document.createElement("div");
     typeDiv.innerText = `Form type: ${formType}`;
     div.appendChild(typeDiv);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    pageHandler(0);
+    createAsrsForm();
 });
 
 document.addEventListener("click", (e) => {
