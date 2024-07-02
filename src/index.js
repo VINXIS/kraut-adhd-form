@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tr = document.createElement("tr");
     ["Questions", ...questionOptions].forEach(text => {
         const th = document.createElement("th");
-        th.setAttribute("scope", "col");
+        th.scope = "col";
         th.innerText = text;
         tr.appendChild(th);
     });
@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
             appendPartHeader(tbody, "Part B");
         const tr = document.createElement("tr");
         const th = document.createElement("th");
-        th.setAttribute("scope", "row");
+        th.scope = "row";
         th.innerText = question.question;
         tr.appendChild(th);
 
