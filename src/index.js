@@ -458,9 +458,42 @@ const submitButton = createButton("Submit", (e) => {
 //     }
 // }
 
+function toggleOtherInput(inputName, toggle) {
+    const otherInput = document.getElementById(`${inputName}Input`);
+    otherInput.style.display = toggle ? "block" : "none";
+}
+
 function adhdDiagnosis(status) {
     document.getElementById("diagnosedADHD").style.display = status === "diagnosed" ? "block" : "none";
     document.getElementById("undiagnosedADHD").style.display = status === "undiagnosed" ? "block" : "none";
+}
+
+function addInputRatioListeners() {
+    for (const question of demographicsQuestions) {
+        if (question.inputType !== "radio")
+            continue;
+        const options = document.getElementsByName(question.inputName);
+        options.forEach(option => {
+            option.addEventListener("change", (e) => {
+                toggleOtherInput(question.inputName, e.target.value === "__other_option__");
+                if (question.inputName === "diagnosedADHD")
+                    if (e.target.value === "Yes")
+                        adhdDiagnosis("diagnosed");
+                    else if (e.target.value === "No")
+                        adhdDiagnosis("undiagnosed");
+                    else
+                        adhdDiagnosis(false);
+            });
+        });
+    } 
+}
+
+function ignoreForm() {
+    if (!confirm("THIS IS ONLY FOR MEDICAL STAFF/ASSISTANTS.\n\nAre you sure you want to confirm form decline?"))
+        return;
+
+    window.open(declinedUrl, "_blank").focus();
+    window.location.reload();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -468,6 +501,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttons = document.getElementById("buttons");
     buttons.appendChild(submitButton);
 
+    const declineButton = document.getElementById("declineButton");
+    declineButton.addEventListener("click", ignoreForm);
+
+    addInputRatioListeners();
     adhdDiagnosis(false);
     createAsisForm();
     createAsrsForm();
@@ -499,17 +536,4 @@ function appendPartHeader(tbody, partName) {
     th.innerText = `\n${partName}`;
     tr.appendChild(th);
     tbody.appendChild(tr);
-}
-
-function toggleOtherInput(inputName, toggle) {
-    const otherInput = document.getElementById(`${inputName}Input`);
-    otherInput.style.display = toggle ? "block" : "none";
-}
-
-function ignoreForm() {
-    if (!confirm("THIS IS ONLY FOR MEDICAL STAFF/ASSISTANTS.\n\nAre you sure you want to confirm form decline?"))
-        return;
-
-    window.open(declinedUrl, "_blank").focus();
-    window.location.reload();
 }

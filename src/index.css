@@ -37,7 +37,7 @@ td > input {
     background-color: #888;
 }
 
-.redButton {
+#declineButton {
     position: fixed;
     top: 0;
     left: 0;
