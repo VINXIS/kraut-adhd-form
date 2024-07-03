@@ -36,64 +36,76 @@
             <p>Gender Identity</p>
             <div class="flexbox">
                 <div>
-                    <input type="radio" name="gender" id="male" value="Male">
+                    <input type="radio" name="gender" id="male" value="Male" onclick="toggleOtherInput('gender', false)">
                     <label for="male">Male</label>
                 </div>
                 <div>
-                    <input type="radio" name="gender" id="female" value="Female">
+                    <input type="radio" name="gender" id="female" value="Female" onclick="toggleOtherInput('gender', false)">
                     <label for="female">Female</label>
                 </div>
                 <div>
-                    <input type="radio" name="gender" id="nonbinary" value="Non-binary">
+                    <input type="radio" name="gender" id="nonbinary" value="Non-binary" onclick="toggleOtherInput('gender', false)">
                     <label for="nonbinary">Non-binary</label>
                 </div>
                 <div>
-                    <input type="radio" name="gender" id="transgender" value="Transgender">
+                    <input type="radio" name="gender" id="transgender" value="Transgender" onclick="toggleOtherInput('gender', false)">
                     <label for="transgender">Transgender</label>
                 </div>
                 <div>
-                    <input type="radio" name="gender" id="noAnswerGender" value="Prefer not to answer">
+                    <input type="radio" name="gender" id="noAnswerGender" value="Prefer not to answer" onclick="toggleOtherInput('gender', false)">
                     <label for="noAnswerGender">Prefer not to answer</label>
                 </div>
                 <div>
-                    <input type="radio" name="gender" id="otherGender" value="other">
+                    <input type="radio" name="gender" id="otherGender" value="__other_option__" onclick="toggleOtherInput('gender', true)">
                     <label for="otherGender">Other</label>
+                </div>
+                <div id="genderInput" style="display: none;">
+                    <label for="genderOtherInput">Please specify:</label>
+                    <input type="text" id="genderOtherInput" name="genderOtherInput">
                 </div>
             </div>
             <hr>
             <p>Level of Education</p>
             <div class="flexbox">
                 <div>
-                    <input type="radio" name="education" id="highschool" value="High school diploma, or equivalent">
+                    <input type="radio" name="education" id="highschool" value="High school diploma, or equivalent" onclick="toggleOtherInput('education', false)">
                     <label for="highschool">High school diploma, or equivalent</label>
                 </div>
                 <div>
-                    <input type="radio" name="education" id="postsec" value="Post-secondary (ex. university, college), some or completed">
+                    <input type="radio" name="education" id="postsec" value="Post-secondary (ex. university, college), some or completed" onclick="toggleOtherInput('education', false)">
                     <label for="postsec">Post-secondary (ex. university, college), some or completed</label>
                 </div>
                 <div>
-                    <input type="radio" name="education" id="graduate" value="Professional/Graduate degree (ex. MA, MSc, PhD), some or completed">
+                    <input type="radio" name="education" id="graduate" value="Professional/Graduate degree (ex. MA, MSc, PhD), some or completed" onclick="toggleOtherInput('education', false)">
                     <label for="graduate">Professional/Graduate degree (ex. MA, MSc, PhD), some  or completed</label>
                 </div>
                 <div>
-                    <input type="radio" name="education" id="otherEducation" value="other">
+                    <input type="radio" name="education" id="otherEducation" value="__other_option__" onclick="toggleOtherInput('education', true)">
                     <label for="otherEducation">Other</label>
+                </div>
+                <div id="educationInput" style="display: none;">
+                    <label for="educationOtherInput">Please specify:</label>
+                    <input type="text" id="educationOtherInput" name="educationOtherInput">
                 </div>
             </div>
             <hr>
             <p>Have you been diagnosed with ADHD?</p>
             <div class="flexbox">
                 <div>
-                    <input type="radio" name="diagnosedADHD" id="yesADHD" value="Yes">
+                    <input type="radio" name="diagnosedADHD" id="yesADHD" value="Yes" onclick="toggleOtherInput('diagnosedADHD', false); adhdDiagnosis('diagnosed')">
                     <label for="yesADHD">Yes</label>
                 </div>
                 <div>
-                    <input type="radio" name="diagnosedADHD" id="noADHD" value="No">
+                    <input type="radio" name="diagnosedADHD" id="noADHD" value="No" onclick="toggleOtherInput('diagnosedADHD', false); adhdDiagnosis('undiagnosed')">
                     <label for="noADHD">No</label>
                 </div>
                 <div>
-                    <input type="radio" name="diagnosedADHD" id="otherDiagnosis" value="other">
+                    <input type="radio" name="diagnosedADHD" id="otherDiagnosis" value="__other_option__" onclick="toggleOtherInput('diagnosedADHD', true); adhdDiagnosis(false)">
                     <label for="otherDiagnosis">Other</label>
+                </div>
+                <div id="diagnosedADHDInput" style="display: none;">
+                    <label for="diagnosedADHDOtherInput">Please specify:</label>
+                    <input type="text" id="diagnosedADHDOtherInput" name="diagnosedADHDOtherInput">
                 </div>
             </div>
             <hr>
@@ -101,20 +113,24 @@
                 <p>Who diagnosed you with ADHD?</p>
                 <div class="flexbox">
                     <div>
-                        <input type="radio" name="diagnosedBy" id="familyPhys" value="Family Physician">
+                        <input type="radio" name="diagnosedBy" id="familyPhys" value="Family Physician" onclick="toggleOtherInput('diagnosedBy', false)">
                         <label for="familyPhys">Family Physician</label>
                     </div>
                     <div>
-                        <input type="radio" name="diagnosedBy" id="psychiatrist" value="Psychiatrist">
+                        <input type="radio" name="diagnosedBy" id="psychiatrist" value="Psychiatrist" onclick="toggleOtherInput('diagnosedBy', false)">
                         <label for="psychiatrist">Psychiatrist</label>
                     </div>
                     <div>
-                        <input type="radio" name="diagnosedBy" id="psychologist" value="Psychologist">
+                        <input type="radio" name="diagnosedBy" id="psychologist" value="Psychologist" onclick="toggleOtherInput('diagnosedBy', false)">
                         <label for="psychologist">Psychologist</label>
                     </div>
                     <div>
-                        <input type="radio" name="diagnosedBy" id="otherDiagnosedBy" value="other">
+                        <input type="radio" name="diagnosedBy" id="otherDiagnosedBy" value="__other_option__" onclick="toggleOtherInput('diagnosedBy', true)">
                         <label for="otherDiagnosedBy">Other</label>
+                    </div>
+                    <div id="diagnosedByInput" style="display: none;">
+                        <label for="diagnosedByOtherInput">Please specify:</label>
+                        <input type="text" id="diagnosedByOtherInput" name="diagnosedByOtherInput">
                     </div>
                 </div>
                 <hr>
@@ -140,16 +156,20 @@
                 <p>Are you currently taking your ADHD medication regularly (more than 3 days/week in the past 2 weeks)?</p>
                 <div class="flexbox">
                     <div>
-                        <input type="radio" name="takingMedication" id="yesMedication" value="Yes">
+                        <input type="radio" name="takingMedication" id="yesMedication" value="Yes" onclick="toggleOtherInput('takingMedication', false)">
                         <label for="yesMedication">Yes</label>
                     </div>
                     <div>
-                        <input type="radio" name="takingMedication" id="noMedication" value="No">
+                        <input type="radio" name="takingMedication" id="noMedication" value="No" onclick="toggleOtherInput('takingMedication', false)">
                         <label for="noMedication">No</label>
                     </div>
                     <div>
-                        <input type="radio" name="takingMedication" id="otherMedication" value="other">
+                        <input type="radio" name="takingMedication" id="otherMedication" value="__other_option__" onclick="toggleOtherInput('takingMedication', true)">
                         <label for="otherMedication">Other</label>
+                    </div>
+                    <div id="takingMedicationInput" style="display: none;">
+                        <label for="takingMedicationOtherInput">Please specify:</label>
+                        <input type="text" id="takingMedicationOtherInput" name="takingMedicationOtherInput">
                     </div>
                 </div>
             </div>

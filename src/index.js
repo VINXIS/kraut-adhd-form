@@ -370,22 +370,36 @@ function createButton(text, clickHandler) {
     const button = document.createElement("button");
     button.innerText = text;
     button.addEventListener("click", clickHandler);
-    button.disabled = text === "Previous" && page === 0;
+    // button.disabled = text === "Previous" && page === 0;
     return button;
 }
 
+let demographicsError = false;
 const submitButton = createButton("Submit", (e) => {
+    demographicsError = false;
     const demographicsForm = document.getElementById("demographics");
     const demographicsEntries = demographicsQuestions.map(question => {
         if (question.inputType !== "checkbox") {
-            const input = demographicsForm[question.inputName]; 
-            return input.value ? `${question.entry}=${encodeURIComponent(input.value)}` : "";
+            const input = demographicsForm[question.inputName];
+            if (input.value !== "__other_option__") 
+                return input.value ? `${question.entry}=${encodeURIComponent(input.value)}` : "";
+            // Other selected
+            const otherInput = demographicsForm[`${question.inputName}OtherInput`];
+            if (otherInput.value === "") {
+                alert(`Please fill in the "Other" field for the demographics question "${question.question}"`);
+                demographicsError = true;
+                return "";
+            }
+            return `${question.entry}=${encodeURIComponent(input.value)}&${question.entry}.other_option_response=${encodeURIComponent(otherInput.value)}`;
         }
+        // Checkbox
         const inputs = Array.from(demographicsForm[question.inputName]);
         return inputs.map(input => {
             return input.checked ? `${question.entry}=${encodeURIComponent(input.value)}` : "";
-        }).filter(entry => entry !== "");
-    }).filter(entry => entry !== "").flat();
+        });
+    }).flat().filter(entry => entry !== "");
+    if (demographicsError)
+        return;
 
     const asisQuestionsForm = document.getElementById("asisQuestions");
     const asisSelected = Array.from(asisQuestionsForm.querySelectorAll("input:checked"));
@@ -422,30 +436,39 @@ const submitButton = createButton("Submit", (e) => {
     window.location.reload();
 });
 
-function resetNavButtons() {
-    const buttons = document.getElementById("buttons");
-    buttons.innerHTML = "";
-    buttons.appendChild(createButton("Previous", (e) => pageHandler(-1)));
-    if (page !== 3)
-        buttons.appendChild(createButton("Next", (e) => pageHandler(1)));
-    if (page === 3)
-        buttons.appendChild(submitButton);
-}
+// function resetNavButtons() {
+//     const buttons = document.getElementById("buttons");
+//     buttons.innerHTML = "";
+//     buttons.appendChild(createButton("Previous", (e) => pageHandler(-1)));
+//     if (page !== 3)
+//         buttons.appendChild(createButton("Next", (e) => pageHandler(1)));
+//     if (page === 3)
+//         buttons.appendChild(submitButton);
+// }
 
-let page = 0;
-const pageDivIDS = ["frontSection", "demographicsForm", "asisForm", "asrsForm"];
-function pageHandler(number) {
-    page = Math.max(0, page + number);
-    resetNavButtons();
+// let page = 0;
+// const pageDivIDS = ["frontSection", "demographicsForm", "asisForm", "asrsForm"];
+// function pageHandler(number) {
+//     page = Math.max(0, page + number);
+//     resetNavButtons();
 
-    for (let i = 0; i < pageDivIDS.length; i++) {
-        const div = document.getElementById(pageDivIDS[i]);
-        div.style.display = i === page ? "block" : "none";
-    }
+//     for (let i = 0; i < pageDivIDS.length; i++) {
+//         const div = document.getElementById(pageDivIDS[i]);
+//         div.style.display = i === page ? "block" : "none";
+//     }
+// }
+
+function adhdDiagnosis(status) {
+    document.getElementById("diagnosedADHD").style.display = status === "diagnosed" ? "block" : "none";
+    document.getElementById("undiagnosedADHD").style.display = status === "undiagnosed" ? "block" : "none";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    pageHandler(0);
+    // pageHandler(0);
+    const buttons = document.getElementById("buttons");
+    buttons.appendChild(submitButton);
+
+    adhdDiagnosis(false);
     createAsisForm();
     createAsrsForm();
 });
@@ -453,11 +476,14 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("click", (e) => {
     const clickDate = new Date();
     const question = e.target.closest("tr")?.querySelector("th")?.innerText || "N/A";
-    const questionIndex = page === 3 ? asrsOrderedQuestions.findIndex(q => q.question === question) : asisQuestions.findIndex(q => q.question === question);
+    let questionIndex = asisQuestions.findIndex(q => q.question === question);
+    if (questionIndex === -1)
+        questionIndex = asrsOrderedQuestions.findIndex(q => q.question === question);
+    // const questionIndex = page === 3 ? asrsOrderedQuestions.findIndex(q => q.question === question) : asisQuestions.findIndex(q => q.question === question);
     const answerElement = e.target.closest("td")?.querySelector("input");
     const answer = answerElement?.value || -1;
     clicks.push({
-        p: page,
+        // p: page,
         q: questionIndex,
         a: answer,
         c: typeof answerElement?.checked === "boolean" ? answerElement.checked | 0 : -1,
@@ -473,6 +499,11 @@ function appendPartHeader(tbody, partName) {
     th.innerText = `\n${partName}`;
     tr.appendChild(th);
     tbody.appendChild(tr);
+}
+
+function toggleOtherInput(inputName, toggle) {
+    const otherInput = document.getElementById(`${inputName}Input`);
+    otherInput.style.display = toggle ? "block" : "none";
 }
 
 function ignoreForm() {
