@@ -404,14 +404,14 @@ const submitButton = createButton("Submit", (e) => {
     const asisQuestionsForm = document.getElementById("asisQuestions");
     const asisSelected = Array.from(asisQuestionsForm.querySelectorAll("input:checked"));
     if (asisSelected.length !== asisQuestions.length) {
-        alert("Please answer all ASIS questions");
+        alert("Please answer all Screening Form #2 questions");
         return;
     }
     
     const asrsQuestionsForm = document.getElementById("asrsQuestions");
     const asrsSelected = Array.from(asrsQuestionsForm.querySelectorAll("input:checked"));
     if (asrsSelected.length !== asrsOrderedQuestions.length) {
-        alert("Please answer all ASRS questions");
+        alert("Please answer all Screening Form #1 questions");
         return;
     }
 
