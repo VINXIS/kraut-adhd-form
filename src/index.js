@@ -370,7 +370,7 @@ function createButton(text, clickHandler) {
     const button = document.createElement("button");
     button.innerText = text;
     button.addEventListener("click", clickHandler);
-    // button.disabled = text === "Previous" && page === 0;
+    button.disabled = text === "Previous" && page === 0;
     return button;
 }
 
@@ -436,27 +436,28 @@ const submitButton = createButton("Submit", (e) => {
     window.location.reload();
 });
 
-// function resetNavButtons() {
-//     const buttons = document.getElementById("buttons");
-//     buttons.innerHTML = "";
-//     buttons.appendChild(createButton("Previous", (e) => pageHandler(-1)));
-//     if (page !== 3)
-//         buttons.appendChild(createButton("Next", (e) => pageHandler(1)));
-//     if (page === 3)
-//         buttons.appendChild(submitButton);
-// }
+function resetNavButtons() {
+    const buttons = document.getElementById("buttons");
+    buttons.innerHTML = "";
+    buttons.appendChild(createButton("Previous", (e) => pageHandler(-1)));
+    if (page !== 3)
+        buttons.appendChild(createButton("Next", (e) => pageHandler(1)));
+    if (page === 3)
+        buttons.appendChild(submitButton);
+}
 
-// let page = 0;
-// const pageDivIDS = ["frontSection", "demographicsForm", "asisForm", "asrsForm"];
-// function pageHandler(number) {
-//     page = Math.max(0, page + number);
-//     resetNavButtons();
+let page = 0;
+const pageDivIDS = ["frontSection", "demographicsForm", "asrsForm", "asisForm"];
+function pageHandler(number) {
+    page = Math.max(0, page + number);
+    resetNavButtons();
 
-//     for (let i = 0; i < pageDivIDS.length; i++) {
-//         const div = document.getElementById(pageDivIDS[i]);
-//         div.style.display = i === page ? "block" : "none";
-//     }
-// }
+    for (let i = 0; i < pageDivIDS.length; i++) {
+        const div = document.getElementById(pageDivIDS[i]);
+        div.style.display = i === page ? "block" : "none";
+    }
+    window.scrollTo(0, 0);
+}
 
 function toggleOtherInput(inputName, toggle) {
     const otherInput = document.getElementById(`${inputName}Input`);
@@ -477,12 +478,7 @@ function addInputRatioListeners() {
             option.addEventListener("change", (e) => {
                 toggleOtherInput(question.inputName, e.target.value === "__other_option__");
                 if (question.inputName === "diagnosedADHD")
-                    if (e.target.value === "Yes")
-                        adhdDiagnosis("diagnosed");
-                    else if (e.target.value === "No")
-                        adhdDiagnosis("undiagnosed");
-                    else
-                        adhdDiagnosis(false);
+                    adhdDiagnosis(e.target.value === "Yes" ? "diagnosed" : "undiagnosed");
             });
         });
     } 
@@ -497,15 +493,14 @@ function ignoreForm() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    // pageHandler(0);
-    const buttons = document.getElementById("buttons");
-    buttons.appendChild(submitButton);
+    pageHandler(0);
 
     const declineButton = document.getElementById("declineButton");
     declineButton.addEventListener("click", ignoreForm);
 
     addInputRatioListeners();
     adhdDiagnosis(false);
+
     createAsisForm();
     createAsrsForm();
 });
@@ -513,14 +508,11 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("click", (e) => {
     const clickDate = new Date();
     const question = e.target.closest("tr")?.querySelector("th")?.innerText || "N/A";
-    let questionIndex = asisQuestions.findIndex(q => q.question === question);
-    if (questionIndex === -1)
-        questionIndex = asrsOrderedQuestions.findIndex(q => q.question === question);
-    // const questionIndex = page === 3 ? asrsOrderedQuestions.findIndex(q => q.question === question) : asisQuestions.findIndex(q => q.question === question);
+    const questionIndex = page === 3 ? asisQuestions.findIndex(q => q.question === question) : asrsOrderedQuestions.findIndex(q => q.question === question);
     const answerElement = e.target.closest("td")?.querySelector("input");
     const answer = answerElement?.value || -1;
     clicks.push({
-        // p: page,
+        p: page,
         q: questionIndex,
         a: answer,
         c: typeof answerElement?.checked === "boolean" ? answerElement.checked | 0 : -1,
@@ -534,6 +526,7 @@ function appendPartHeader(tbody, partName) {
     const tr = document.createElement("tr");
     const th = document.createElement("th");
     th.innerText = `\n${partName}`;
+    th.classList.add("partHeader");
     tr.appendChild(th);
     tbody.appendChild(tr);
 }
