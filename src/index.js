@@ -379,24 +379,22 @@ const submitButton = createButton("Submit", (e) => {
     demographicsError = false;
     const demographicsForm = document.getElementById("demographics");
     const demographicsEntries = demographicsQuestions.map(question => {
-        if (question.inputType !== "checkbox") {
-            const input = demographicsForm[question.inputName];
-            if (input.value !== "__other_option__") 
-                return input.value ? `${question.entry}=${encodeURIComponent(input.value)}` : "";
-            // Other selected
-            const otherInput = demographicsForm[`${question.inputName}OtherInput`];
-            if (otherInput.value === "") {
-                alert(`Please fill in the "Other" field for the demographics question "${question.question}"`);
-                demographicsError = true;
-                return "";
-            }
-            return `${question.entry}=${encodeURIComponent(input.value)}&${question.entry}.other_option_response=${encodeURIComponent(otherInput.value)}`;
+        if (question.inputType === "checkbox") {
+            const inputs = Array.from(demographicsForm[question.inputName]);
+            return inputs.map(input => {
+                return input.checked ? `${question.entry}=${encodeURIComponent(input.value)}` : "";
+            });
         }
-        // Checkbox
-        const inputs = Array.from(demographicsForm[question.inputName]);
-        return inputs.map(input => {
-            return input.checked ? `${question.entry}=${encodeURIComponent(input.value)}` : "";
-        });
+        const input = demographicsForm[question.inputName];
+        if (input.value !== "__other_option__") 
+            return input.value ? `${question.entry}=${encodeURIComponent(input.value)}` : "";
+        const otherInput = demographicsForm[`${question.inputName}OtherInput`];
+        if (otherInput.value === "") {
+            alert(`Please fill in the "Other" field for the demographics question "${question.question}"`);
+            demographicsError = true;
+            return "";
+        }
+        return `${question.entry}=${encodeURIComponent(input.value)}&${question.entry}.other_option_response=${encodeURIComponent(otherInput.value)}`;
     }).flat().filter(entry => entry !== "");
     if (demographicsError)
         return;
