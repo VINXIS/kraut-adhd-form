@@ -8,6 +8,7 @@
     <script defer src="index.js"></script>
 </head>
 <body>
+    <div class="draft">DRAFT</div>
     <div id="frontSection">
         <input id="declineButton" type="button" value="FOR CLINIC STAFF">
         <h1>ADHD Research Form</h1>
@@ -23,8 +24,8 @@
         <p><b>Voluntary Participation:</b> You are under no obligation to participate. Given the anonymous nature of the survey, once you have submitted your responses it will no longer be possible to withdraw them from the study.</p>
         <p><b>Information about the Study Results:</b> Research findings may be presented at medical conferences and published in a medical journal.</p>
         <p><b>Contact Information:</b> If you have any questions or require more information about the study itself, you may contact the researcher at the numbers mentioned herein.</p>
-        <p>The plan for this study has been reviewed by a Research Ethics Board at the University of Alberta (U of A ethics ID#Pro00141239). If you have any questions regarding your rights as a research participant or how the research is being conducted you may contact the Research Ethics Office at 780-492-2615.</p>
-        <p>If you would like a copy of this form, please ask the pharmacist.</p>
+        <p>The plan for this study has been reviewed by a Research Ethics Board at the University of Alberta (U of A ethics ID#Pro00144202). If you have any questions regarding your rights as a research participant or how the research is being conducted you may contact the Research Ethics Office at 780-492-2615.</p>
+        <p>If you would like a copy of this form, please ask front staff.</p>
         <p><b>Completion and submission of the survey means your consent to participate.</b></p>
     </div>
     <div id="demographicsForm">
@@ -86,6 +87,42 @@
                 <div id="educationInput" style="display: none;">
                     <label for="educationOtherInput">Please specify:</label>
                     <input type="text" id="educationOtherInput" name="educationOtherInput">
+                </div>
+            </div>
+            <hr>
+            <p>Ethnicity (if two or more please list in other)</p>
+            <div class="flexbox">
+                <div>
+                    <input type="radio" name="ethnicity" id="caucasian" value="White">
+                    <label for="white">White</label>
+                </div>
+                <div>
+                    <input type="radio" name="ethnicity" id="black" value="Black or African-American">
+                    <label for="black">Black</label>
+                </div>
+                <div>
+                    <input type="radio" name="ethnicity" id="asian" value="Asian">
+                    <label for="asian">Asian</label>
+                </div>
+                <div>
+                    <input type="radio" name="ethnicity" id="hispanic" value="Hispanic or Latino">
+                    <label for="hispanic">Hispanic</label>
+                </div>
+                <div>
+                    <input type="radio" name="ethnicity" id="indigenous" value="Indigenous">
+                    <label for="indigenous">Indigenous</label>
+                </div>
+                <div>
+                    <input type="radio" name="ethnicity" id="pacific" value="Native Hawaiian or Pacific Islander">
+                    <label for="pacific">Native Hawaiian or Pacific Islander</label>
+                </div>
+                <div>
+                    <input type="radio" name="ethnicity" id="otherEthnicity" value="__other_option__">
+                    <label for="otherEthnicity">Other</label>
+                </div>
+                <div id="ethnicityInput" style="display: none;">
+                    <label for="ethnicityOtherInput">Please specify:</label>
+                    <input type="text" id="ethnicityOtherInput" name="ethnicityOtherInput">
                 </div>
             </div>
             <hr>

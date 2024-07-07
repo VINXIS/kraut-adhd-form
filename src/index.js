@@ -18,6 +18,12 @@ const demographicsQuestions = [
         entry: "entry.128715196",
     },
     {
+        question: "Ethnicity",
+        inputName: "ethnicity",
+        inputType: "radio",
+        entry: "entry.104950939",
+    },
+    {
         question: "Have you been diagnosed with ADHD?",
         inputName: "diagnosedADHD",
         inputType: "radio",
@@ -485,7 +491,7 @@ const submitButton = createButton("Submit", (e) => {
     ];
 
     const clicksString = clicks.map(click => {
-        return `${click.p},${click.q},${click.a},${click.c},${click.x},${click.y},${click.d.toISOString()}`;
+        return `${click.p},${click.q},${click.a},${click.c},${click.x},${click.y},${click.d.getTime()}`;
     }).join("|");
 
     const url = `${baseUrl}&${entries.join("&")}&${clickEntry}=${encodeURIComponent(clicksString)}`;
