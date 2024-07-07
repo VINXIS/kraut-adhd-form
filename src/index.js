@@ -62,105 +62,162 @@ const demographicsQuestions = [
 ]
 
 const asisQuestions = [{
-    question: "I regularly hit “reply all” by mistake for e-mails",
-    entry: "entry.1180294866"
-  }, {
-    question: "I avoid nice restaurants because meals take too long",
-    entry: "entry.1729376175"
-  }, {
-    question: "I have so much energy, I sometimes have trouble catching my breath",
-    entry: "entry.1012025606"
-  }, {
-    question: "I often burn food when cooking because I forget about it",
-    entry: "entry.1606171849"
-  }, {
-    question: "I’m good at keeping secrets",
-    entry: "entry.433009121"
-  }, {
-    question: "I sometimes enjoy quiet time",
-    entry: "entry.327099982"
-  }, {
-    question: "I would pass up a very high paying job if it required me to sit at a desk all day ",
-    entry: "entry.1253157306"
-  }, {
-    question: "I can typically find things in my own home",
-    entry: "entry.194936679"
-  }, {
-    question: "When I have a big decision, I prefer to take time to think about it",
-    entry: "entry.342717729"
-  }, {
-    question: "People seem to think I am a good listener",
-    entry: "entry.937639672"
-  }, {
-    question: "Most of the time I can engage in uninterrupted pleasurable activity",
-    entry: "entry.186469105"
-  }, {
-    question: "I feel I am a good judge of character",
-    entry: "entry.586368867"
-  }, {
-    question: "I’m an impulsive buyer",
-    entry: "entry.394013469"
-  }, {
-    question: "I regularly get distracted by the teacher in class",
-    entry: "entry.830652180"
-  }, {
-    question: "People say that I am generally helpful",
-    entry: "entry.1526792226"
-  }, {
-    question: "I frequently send e-mails to the wrong person by mistake",
-    entry: "entry.1728251790"
-  }, {
-    question: "I frequently offend people",
-    entry: "entry.1096044739"
-  }, {
-    question: "People think I am too loud at parties",
-    entry: "entry.1355664473"
-  }, {
-    question: "When I have a big decision, I like to take time to think about it",
-    entry: "entry.1425883855"
-  }, {
-    question: "People think that I am caring",
-    entry: "entry.1091569406"
-  }, {
-    question: "I am the most talkative person I know",
-    entry: "entry.1607619617"
-  }, {
-    question: "I am sensitive to other people’s needs",
-    entry: "entry.50312923"
-  }, {
-    question: "I forget to tie my shoes",
-    entry: "entry.1677265166"
-  }, {
-    question: "I often hit “reply all” by mistake for e-mails",
-    entry: "entry.941816539"
-  }, {
-    question: "I sometimes speak slowly when trying to think of something to say",
-    entry: "entry.1026495874"
-  }, {
-    question: "People say that I am usually helpful",
-    entry: "entry.968600294"
-  }, {
-    question: "People think I am a good listener",
-    entry: "entry.371954748"
-  }, {
-    question: "I’m empathetic to the needs of others",
-    entry: "entry.1207378031"
-  }, {
-    question: "I would not pass up a high paying job if it required me to sit at a desk all day",
-    entry: "entry.516189164"
-  }, {
-    question: "I am unable to watch my favorite TV show without taking a break",
-    entry: "entry.1846961360"
-  }, {
-    question: "I frequently miss a button when putting on a shirt",
-    entry: "entry.193984427"
-  }, {
-    question: "I rarely forget to tie my shoes",
-    entry: "entry.1661073800"
-  }, {
-    question: "I am good at keeping secrets",
-    entry: "entry.2013640086"
-  }];
+    "question": "I regularly hit “reply all” by mistake for e-mails",
+    "entry": "entry.1180294866"
+    }, {
+    "question": "I avoid nice restaurants because meals take too long",
+    "entry": "entry.1729376175"
+    }, {
+    "question": "It’s very difficult for me to stay focused on homework or other tasks",
+    "entry": "entry.1366320492"
+    }, {
+    "question": "I have so much energy, I sometimes have trouble catching my breath",
+    "entry": "entry.1012025606"
+    }, {
+    "question": "I find it difficult to stay quiet",
+    "entry": "entry.376512316"
+    }, {
+    "question": "I often burn food when cooking because I forget about it",
+    "entry": "entry.1606171849"
+    }, {
+    "question": "I frequently misplace or lose my personal belongings",
+    "entry": "entry.388384380"
+    }, {
+    "question": "I’m good at keeping secrets",
+    "entry": "entry.433009121"
+    }, {
+    "question": "I frequently feel restless",
+    "entry": "entry.1907571640"
+    }, {
+    "question": "I sometimes enjoy quiet time",
+    "entry": "entry.327099982"
+    }, {
+    "question": "I would pass up a very high paying job if it required me to sit at a desk all day ",
+    "entry": "entry.1253157306"
+    }, {
+    "question": "I can typically find things in my own home",
+    "entry": "entry.194936679"
+    }, {
+    "question": "When I have a big decision, I prefer to take time to think about it",
+    "entry": "entry.342717729"
+    }, {
+    "question": "People seem to think I am a good listener",
+    "entry": "entry.937639672"
+    }, {
+    "question": "Most of the time I can engage in uninterrupted pleasurable activity",
+    "entry": "entry.186469105"
+    }, {
+    "question": "Others seem to find it difficult to keep up with me",
+    "entry": "entry.640419731"
+    }, {
+    "question": "I feel I am a good judge of character",
+    "entry": "entry.586368867"
+    }, {
+    "question": "I’m an impulsive buyer",
+    "entry": "entry.394013469"
+    }, {
+    "question": "I regularly get distracted by the teacher in class",
+    "entry": "entry.830652180"
+    }, {
+    "question": "People say that I am generally helpful",
+    "entry": "entry.1526792226"
+    }, {
+    "question": "I frequently send e-mails to the wrong person by mistake",
+    "entry": "entry.1728251790"
+    }, {
+    "question": "I frequently offend people",
+    "entry": "entry.1096044739"
+    }, {
+    "question": "People think I am too loud at parties",
+    "entry": "entry.1355664473"
+    }, {
+    "question": "Even when directly spoken to, I have trouble listening",
+    "entry": "entry.1606653276"
+    }, {
+    "question": "When I have a big decision, I like to take time to think about it",
+    "entry": "entry.1425883855"
+    }, {
+    "question": "I move from one activity to another so often that I never get anything done",
+    "entry": "entry.512546777"
+    }, {
+    "question": "I often butt into the conversations of others",
+    "entry": "entry.1572853130"
+    }, {
+    "question": "People think that I am caring",
+    "entry": "entry.1091569406"
+    }, {
+    "question": "I forget things when doing chores",
+    "entry": "entry.180604283"
+    }, {
+    "question": "I am the most talkative person I know",
+    "entry": "entry.1607619617"
+    }, {
+    "question": "I am sensitive to other people’s needs",
+    "entry": "entry.50312923"
+    }, {
+    "question": "Rather than interrupt, I mostly let people finish talking",
+    "entry": "entry.1855323503"
+    }, {
+    "question": "I often misplace or lose my personal belongings",
+    "entry": "entry.1633370391"
+    }, {
+    "question": "I forget to tie my shoes",
+    "entry": "entry.1677265166"
+    }, {
+    "question": "I find it difficult to wait for my turn",
+    "entry": "entry.1342912434"
+    }, {
+    "question": "I talk a lot, even when I don’t have anything particularly important to say",
+    "entry": "entry.1962158077"
+    }, {
+    "question": "I often hit “reply all” by mistake for e-mails",
+    "entry": "entry.941816539"
+    }, {
+    "question": "I sometimes speak slowly when trying to think of something to say",
+    "entry": "entry.1026495874"
+    }, {
+    "question": "People say that I am usually helpful",
+    "entry": "entry.968600294"
+    }, {
+    "question": "People think I am a good listener",
+    "entry": "entry.371954748"
+    }, {
+    "question": "I’m empathetic to the needs of others",
+    "entry": "entry.1207378031"
+    }, {
+    "question": "I regularly make careless mistakes",
+    "entry": "entry.217182363"
+    }, {
+    "question": "I would not pass up a high paying job if it required me to sit at a desk all day",
+    "entry": "entry.516189164"
+    }, {
+    "question": "Others often tell me that I am too restless or fidgety",
+    "entry": "entry.1769583407"
+    }, {
+    "question": "I have trouble staying seated",
+    "entry": "entry.1927194966"
+    }, {
+    "question": "I am disorganized and can’t seem to learn how to become organized",
+    "entry": "entry.1894142833"
+    }, {
+    "question": "I am unable to watch my favorite TV show without taking a break",
+    "entry": "entry.1846961360"
+    }, {
+    "question": "I tend to avoid activities that require sustained concentration and a lot of mental effort",
+    "entry": "entry.1758407233"
+    }, {
+    "question": "I frequently miss a button when putting on a shirt",
+    "entry": "entry.193984427"
+    }, {
+    "question": "I rarely forget to tie my shoes",
+    "entry": "entry.1661073800"
+    }, {
+    "question": "I am good at keeping secrets",
+    "entry": "entry.2013640086"
+    }, {
+    "question": "I often get distracted or sidetracked before I complete an activity",
+    "entry": "entry.1499401814"
+}];
 function createAsisForm() {
     const div = document.getElementById("asisForm");
     const form = document.createElement("form");
@@ -300,11 +357,13 @@ const asrsFormTypes = [
     "normal",
     "noHighlight",
     "random",
+    "randomNoHighlight",
 ];
 const asrsFormOrderFunctions = {
     "normal": (asrsQuestions) => asrsQuestions,
     "noHighlight": (asrsQuestions) => asrsQuestions,
     "random": (asrsQuestions) => asrsQuestions.sort(() => Math.random() - 0.5),
+    "randomNoHighlight": (asrsQuestions) => asrsQuestions.sort(() => Math.random() - 0.5),
 }
 const asrsFormType = asrsFormTypes[Math.floor(Math.random() * asrsFormTypes.length)];
 const asrsOrderedQuestions = asrsFormOrderFunctions[asrsFormType](asrsQuestions);
@@ -338,7 +397,7 @@ function createAsrsForm() {
 
         asrsQuestionOptions.forEach((_, j) => {
             const td = document.createElement("td");
-            if (asrsFormType === "normal" && question.highlighted.includes(j))
+            if ((asrsFormType === "normal" || asrsFormType === "random") && question.highlighted.includes(j))
                 td.classList.add("highlighted");
             const input = document.createElement("input");
             input.type = "radio";
