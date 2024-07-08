@@ -21,6 +21,8 @@ thead th {
 
 thead th:not(:first-child) {
     writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    text-align: left;
 }
 
 th, td {
