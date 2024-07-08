@@ -368,11 +368,11 @@ const asrsFormTypes = [
 const asrsFormOrderFunctions = {
     "normal": (asrsQuestions) => asrsQuestions,
     "noHighlight": (asrsQuestions) => asrsQuestions,
-    "random": (asrsQuestions) => asrsQuestions.sort(() => Math.random() - 0.5),
-    "randomNoHighlight": (asrsQuestions) => asrsQuestions.sort(() => Math.random() - 0.5),
+    "random": (asrsQuestions) => [...asrsQuestions].sort(() => Math.random() - 0.5),
+    "randomNoHighlight": (asrsQuestions) => [...asrsQuestions].sort(() => Math.random() - 0.5),
 }
 const asrsFormType = asrsFormTypes[Math.floor(Math.random() * asrsFormTypes.length)];
-const asrsOrderedQuestions = asrsFormOrderFunctions[asrsFormType](asrsQuestions);
+const asrsOrderedQuestions = asrsFormOrderFunctions[asrsFormType]([...asrsQuestions]);
 function createAsrsForm() {
     const div = document.getElementById("asrsForm");
     const form = document.createElement("form");
@@ -586,13 +586,13 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("click", (e) => {
     const clickDate = new Date();
     const question = e.target.closest("tr")?.querySelector("th")?.innerText || "N/A";
-    const questionIndex = page === 3 ? asisQuestions.findIndex(q => q.question === question) : asrsOrderedQuestions.findIndex(q => q.question === question);
+    const questionIndex = page === 3 ? asisQuestions.findIndex(q => q.question === question) : asrsQuestions.findIndex(q => q.question === question);
     const answerElement = e.target.closest("td")?.querySelector("input");
     const answer = answerElement?.value || -1;
     clicks.push({
         p: page,
         q: questionIndex,
-        a: answer,
+        a: answer === "True" ? 1 : answer === "False" ? 0 : answer,
         c: typeof answerElement?.checked === "boolean" ? answerElement.checked | 0 : -1,
         x: e.clientX,
         y: e.clientY,
