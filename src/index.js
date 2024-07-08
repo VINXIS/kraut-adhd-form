@@ -390,11 +390,10 @@ function createAsrsForm() {
     table.appendChild(thead);
 
     const tbody = document.createElement("tbody");
-    appendPartHeader(tbody, "Part A");
 
     asrsOrderedQuestions.forEach((question, i) => {
         if (i === asrsPartALength)
-            appendPartHeader(tbody, "Part B");
+            appendPartHeader(tbody, "Part A");
         const tr = document.createElement("tr");
         const th = document.createElement("th");
         th.scope = "row";
@@ -415,6 +414,7 @@ function createAsrsForm() {
 
         tbody.appendChild(tr);
     });
+    appendPartHeader(tbody, "Part B");
     table.appendChild(tbody);
     form.appendChild(table);
     div.appendChild(form);
@@ -467,13 +467,28 @@ const submitButton = createButton("Submit", (e) => {
     const asrsQuestionsForm = document.getElementById("asrsQuestions");
     const asrsSelected = Array.from(asrsQuestionsForm.querySelectorAll("input:checked"));
     if (asrsSelected.length !== asrsOrderedQuestions.length) {
-        alert("Please answer all Screening Form #1 questions");
+        const trs = Array.from(asrsQuestionsForm.querySelectorAll("tr"));
+        trs.forEach(tr => {
+            if (tr.querySelector("input:checked") === null && tr.querySelector("input") !== null)
+                tr.querySelector("th").classList.add("missing");
+            else
+                tr.querySelector("th").classList.remove("missing");
+        });
+        alert("Please answer all Screening Form #1 questions. They are highlighted in red.");
         return;
     }
 
     const asisQuestionsForm = document.getElementById("asisQuestions");
     const asisSelected = Array.from(asisQuestionsForm.querySelectorAll("input:checked"));
     if (asisSelected.length !== asisQuestions.length) {
+        // Mark any tr with missing answers with a missing class, and remove the missing class from any answered ones
+        const trs = Array.from(asisQuestionsForm.querySelectorAll("tr"));
+        trs.forEach(tr => {
+            if (tr.querySelector("input:checked") === null && tr.querySelector("input") !== null)
+                tr.querySelector("th").classList.add("missing");
+            else
+                tr.querySelector("th").classList.remove("missing");
+        });
         alert("Please answer all Screening Form #2 questions");
         return;
     }
@@ -588,7 +603,8 @@ document.addEventListener("click", (e) => {
 function appendPartHeader(tbody, partName) {
     const tr = document.createElement("tr");
     const th = document.createElement("th");
-    th.innerText = `\n${partName}`;
+    th.colSpan = asrsQuestionOptions.length + 1;
+    th.innerText = partName;
     th.classList.add("partHeader");
     tr.appendChild(th);
     tbody.appendChild(tr);
