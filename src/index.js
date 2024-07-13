@@ -250,53 +250,30 @@ function createButton(text, clickHandler) {
 let demographicsError = false;
 const submitButton = createButton("Submit", (e) => {
     demographicsError = false;
-    diagnosedADHDAnswer = false;
     const demographicsForm = document.getElementById("demographics");
     const demographicsEntries = demographicsQuestions.map(question => {
         if (question.inputType === "checkbox") {
             const inputs = Array.from(demographicsForm[question.inputName]);
-            const inputVals = inputs.map(input => {
+            return inputs.map(input => {
                 return input.checked ? `${question.entry}=${encodeURIComponent(input.value)}` : "";
             });
-            if (inputVals.some(val => val !== "") || (question.diagnosedADHDAnswer && question.diagnosedADHDAnswer !== diagnosedADHDAnswer))
-                return inputVals;
-            alert(`Please fill in the demographics question "${question.question}"`);
-            demographicsError = true;
-            return "";
         }
         const input = demographicsForm[question.inputName];
-        if (question.inputName === "diagnosedADHD")
-            diagnosedADHDAnswer = input.value === "__other_option__" ? "No" : input.value;
-        if (input.value !== "__other_option__") {
-            if (input.value || (question.diagnosedADHDAnswer && question.diagnosedADHDAnswer !== diagnosedADHDAnswer))
-                return `${question.entry}=${encodeURIComponent(input.value)}`;
-            alert(`Please fill in the demographics question "${question.question}"`);
+        if (input.value !== "__other_option__") 
+            return input.value ? `${question.entry}=${encodeURIComponent(input.value)}` : "";
+        const otherInput = demographicsForm[`${question.inputName}OtherInput`];
+        if (otherInput.value === "") {
+            alert(`Please fill in the "Other" field for the demographics question "${question.question}"`);
             demographicsError = true;
             return "";
         }
-        const otherInput = demographicsForm[`${question.inputName}OtherInput`];
-        if (otherInput.value !== "" || (question.diagnosedADHDAnswer && question.diagnosedADHDAnswer !== diagnosedADHDAnswer))
-            return `${question.entry}=${encodeURIComponent(input.value)}&${question.entry}.other_option_response=${encodeURIComponent(otherInput.value)}`;
-        alert(`Please fill in the "Other" field for the demographics question "${question.question}"`);
-        demographicsError = true;
-        return "";
+        return `${question.entry}=${encodeURIComponent(input.value)}&${question.entry}.other_option_response=${encodeURIComponent(otherInput.value)}`;
     }).flat().filter(entry => entry !== "");
     if (demographicsError)
         return;
 
     const asrsQuestionsForm = document.getElementById("asrsQuestions");
     const asrsSelected = Array.from(asrsQuestionsForm.querySelectorAll("input:checked"));
-    if (asrsSelected.length !== asrsOrderedQuestions.length) {
-        const trs = Array.from(asrsQuestionsForm.querySelectorAll("tr"));
-        trs.forEach(tr => {
-            if (tr.querySelector("input:checked") === null && tr.querySelector("input") !== null)
-                tr.querySelector("th").classList.add("missing");
-            else
-                tr.querySelector("th").classList.remove("missing");
-        });
-        alert("Please answer all questions in the Adult ADHD Self-Report Scale. They are highlighted in red.");
-        return;
-    }
 
     const entries = [
         ...demographicsEntries,
