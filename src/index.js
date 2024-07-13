@@ -233,204 +233,6 @@ function createAsrsForm() {
     // div.appendChild(typeDiv);
 }
 
-const asisQuestions = [{
-    "question": "I regularly hit “reply all” by mistake for e-mails",
-    "entry": "entry.1180294866"
-    }, {
-    "question": "I avoid nice restaurants because meals take too long",
-    "entry": "entry.1729376175"
-    }, {
-    "question": "It’s very difficult for me to stay focused on homework or other tasks",
-    "entry": "entry.1366320492"
-    }, {
-    "question": "I have so much energy, I sometimes have trouble catching my breath",
-    "entry": "entry.1012025606"
-    }, {
-    "question": "I find it difficult to stay quiet",
-    "entry": "entry.376512316"
-    }, {
-    "question": "I often burn food when cooking because I forget about it",
-    "entry": "entry.1606171849"
-    }, {
-    "question": "I frequently misplace or lose my personal belongings",
-    "entry": "entry.388384380"
-    }, {
-    "question": "I’m good at keeping secrets",
-    "entry": "entry.433009121"
-    }, {
-    "question": "I frequently feel restless",
-    "entry": "entry.1907571640"
-    }, {
-    "question": "I sometimes enjoy quiet time",
-    "entry": "entry.327099982"
-    }, {
-    "question": "I would pass up a very high paying job if it required me to sit at a desk all day ",
-    "entry": "entry.1253157306"
-    }, {
-    "question": "I can typically find things in my own home",
-    "entry": "entry.194936679"
-    }, {
-    "question": "When I have a big decision, I prefer to take time to think about it",
-    "entry": "entry.342717729"
-    }, {
-    "question": "People seem to think I am a good listener",
-    "entry": "entry.937639672"
-    }, {
-    "question": "Most of the time I can engage in uninterrupted pleasurable activity",
-    "entry": "entry.186469105"
-    }, {
-    "question": "Others seem to find it difficult to keep up with me",
-    "entry": "entry.640419731"
-    }, {
-    "question": "I feel I am a good judge of character",
-    "entry": "entry.586368867"
-    }, {
-    "question": "I’m an impulsive buyer",
-    "entry": "entry.394013469"
-    }, {
-    "question": "I regularly get distracted by the teacher in class",
-    "entry": "entry.830652180"
-    }, {
-    "question": "People say that I am generally helpful",
-    "entry": "entry.1526792226"
-    }, {
-    "question": "I frequently send e-mails to the wrong person by mistake",
-    "entry": "entry.1728251790"
-    }, {
-    "question": "I frequently offend people",
-    "entry": "entry.1096044739"
-    }, {
-    "question": "People think I am too loud at parties",
-    "entry": "entry.1355664473"
-    }, {
-    "question": "Even when directly spoken to, I have trouble listening",
-    "entry": "entry.1606653276"
-    }, {
-    "question": "When I have a big decision, I like to take time to think about it",
-    "entry": "entry.1425883855"
-    }, {
-    "question": "I move from one activity to another so often that I never get anything done",
-    "entry": "entry.512546777"
-    }, {
-    "question": "I often butt into the conversations of others",
-    "entry": "entry.1572853130"
-    }, {
-    "question": "People think that I am caring",
-    "entry": "entry.1091569406"
-    }, {
-    "question": "I forget things when doing chores",
-    "entry": "entry.180604283"
-    }, {
-    "question": "I am the most talkative person I know",
-    "entry": "entry.1607619617"
-    }, {
-    "question": "I am sensitive to other people’s needs",
-    "entry": "entry.50312923"
-    }, {
-    "question": "Rather than interrupt, I mostly let people finish talking",
-    "entry": "entry.1855323503"
-    }, {
-    "question": "I often misplace or lose my personal belongings",
-    "entry": "entry.1633370391"
-    }, {
-    "question": "I forget to tie my shoes",
-    "entry": "entry.1677265166"
-    }, {
-    "question": "I find it difficult to wait for my turn",
-    "entry": "entry.1342912434"
-    }, {
-    "question": "I talk a lot, even when I don’t have anything particularly important to say",
-    "entry": "entry.1962158077"
-    }, {
-    "question": "I often hit “reply all” by mistake for e-mails",
-    "entry": "entry.941816539"
-    }, {
-    "question": "I sometimes speak slowly when trying to think of something to say",
-    "entry": "entry.1026495874"
-    }, {
-    "question": "People say that I am usually helpful",
-    "entry": "entry.968600294"
-    }, {
-    "question": "People think I am a good listener",
-    "entry": "entry.371954748"
-    }, {
-    "question": "I’m empathetic to the needs of others",
-    "entry": "entry.1207378031"
-    }, {
-    "question": "I regularly make careless mistakes",
-    "entry": "entry.217182363"
-    }, {
-    "question": "I would not pass up a high paying job if it required me to sit at a desk all day",
-    "entry": "entry.516189164"
-    }, {
-    "question": "Others often tell me that I am too restless or fidgety",
-    "entry": "entry.1769583407"
-    }, {
-    "question": "I have trouble staying seated",
-    "entry": "entry.1927194966"
-    }, {
-    "question": "I am disorganized and can’t seem to learn how to become organized",
-    "entry": "entry.1894142833"
-    }, {
-    "question": "I am unable to watch my favorite TV show without taking a break",
-    "entry": "entry.1846961360"
-    }, {
-    "question": "I tend to avoid activities that require sustained concentration and a lot of mental effort",
-    "entry": "entry.1758407233"
-    }, {
-    "question": "I frequently miss a button when putting on a shirt",
-    "entry": "entry.193984427"
-    }, {
-    "question": "I rarely forget to tie my shoes",
-    "entry": "entry.1661073800"
-    }, {
-    "question": "I am good at keeping secrets",
-    "entry": "entry.2013640086"
-    }, {
-    "question": "I often get distracted or sidetracked before I complete an activity",
-    "entry": "entry.1499401814"
-}];
-function createAsisForm() {
-    const div = document.getElementById("asisForm");
-    const form = document.createElement("form");
-    form.setAttribute("id", "asisQuestions");
-    const table = document.createElement("table");
-    const thead = document.createElement("thead");
-    const tr = document.createElement("tr");
-    ["Questions", "True", "False"].forEach(text => {
-        const th = document.createElement("th");
-        th.scope = "col";
-        th.innerText = text;
-        tr.appendChild(th);
-    });
-    thead.appendChild(tr);
-    table.appendChild(thead);
-
-    const tbody = document.createElement("tbody");
-    asisQuestions.forEach((question, i) => {
-        const tr = document.createElement("tr");
-        const th = document.createElement("th");
-        th.scope = "row";
-        th.innerText = question.question;
-        tr.appendChild(th);
-
-        ["True", "False"].forEach((text) => {
-            const td = document.createElement("td");
-            const input = document.createElement("input");
-            input.type = "radio";
-            input.name = `question${i}`;
-            input.value = text;
-            td.appendChild(input);
-            tr.appendChild(td);
-        });
-
-        tbody.appendChild(tr);
-    });
-    table.appendChild(tbody);
-    form.appendChild(table);
-    div.appendChild(form);    
-}
-
 const declinedUrl = `https://docs.google.com/forms/d/e/1FAIpQLScOIicBUGYizF1gb4vzxZVbZIBWUot4C8XQrafn0p0UP6zJIg/formResponse?usp=pp_url&submit=Submit&entry.1330571429=No`;
 const baseUrl = `https://docs.google.com/forms/d/e/1FAIpQLScOIicBUGYizF1gb4vzxZVbZIBWUot4C8XQrafn0p0UP6zJIg/formResponse?usp=pp_url&submit=Submit&entry.1330571429=Yes&entry.667455850=${asrsFormType}`;
 
@@ -492,22 +294,7 @@ const submitButton = createButton("Submit", (e) => {
             else
                 tr.querySelector("th").classList.remove("missing");
         });
-        alert("Please answer all Screening Form #1 questions. They are highlighted in red.");
-        return;
-    }
-
-    const asisQuestionsForm = document.getElementById("asisQuestions");
-    const asisSelected = Array.from(asisQuestionsForm.querySelectorAll("input:checked"));
-    if (asisSelected.length !== asisQuestions.length) {
-        // Mark any tr with missing answers with a missing class, and remove the missing class from any answered ones
-        const trs = Array.from(asisQuestionsForm.querySelectorAll("tr"));
-        trs.forEach(tr => {
-            if (tr.querySelector("input:checked") === null && tr.querySelector("input") !== null)
-                tr.querySelector("th").classList.add("missing");
-            else
-                tr.querySelector("th").classList.remove("missing");
-        });
-        alert("Please answer all Screening Form #2 questions");
+        alert("Please answer all questions in the Adult ADHD Self-Report Scale. They are highlighted in red.");
         return;
     }
 
@@ -516,10 +303,6 @@ const submitButton = createButton("Submit", (e) => {
         ...asrsSelected.map((input, i) => {
             const question = asrsOrderedQuestions[i];
             return `${question.entry}=${encodeURIComponent(asrsQuestionOptions[input.value])}`;
-        }),
-        ...asisSelected.map((input, i) => {
-            const question = asisQuestions[i];
-            return `${question.entry}=${encodeURIComponent(input.value)}`;
         }),
     ];
 
@@ -536,14 +319,14 @@ function resetNavButtons() {
     const buttons = document.getElementById("buttons");
     buttons.innerHTML = "";
     buttons.appendChild(createButton("Previous", (e) => pageHandler(-1)));
-    if (page !== 3)
+    if (page !== 2)
         buttons.appendChild(createButton("Next", (e) => pageHandler(1)));
-    if (page === 3)
+    if (page === 2)
         buttons.appendChild(submitButton);
 }
 
 let page = 0;
-const pageDivIDS = ["frontSection", "demographicsForm", "asrsForm", "asisForm"];
+const pageDivIDS = ["frontSection", "demographicsForm", "asrsForm"];
 function pageHandler(number) {
     page = Math.max(0, page + number);
     resetNavButtons();
@@ -598,13 +381,12 @@ document.addEventListener("DOMContentLoaded", () => {
     adhdDiagnosis(false);
 
     createAsrsForm();
-    createAsisForm();
 });
 
 document.addEventListener("click", (e) => {
     const clickDate = new Date();
     const question = e.target.closest("tr")?.querySelector("th")?.innerText || "N/A";
-    const questionIndex = page === 3 ? asisQuestions.findIndex(q => q.question === question) : asrsQuestions.findIndex(q => q.question === question);
+    const questionIndex = asrsQuestions.findIndex(q => q.question === question);
     const answerElement = e.target.closest("td")?.querySelector("input");
     const answer = answerElement?.value || -1;
     clicks.push({
