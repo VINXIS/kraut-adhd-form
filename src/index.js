@@ -34,36 +34,42 @@ const demographicsQuestions = [
         inputName: "diagnosedBy",
         inputType: "radio",
         entry: "entry.648625715",
+        diagnosedADHDAnswer: "Yes",
     },
     {
         question: "In which year were you diagnosed with ADHD?",
         inputName: "yod",
         inputType: "number",
         entry: "entry.1526675713",
+        diagnosedADHDAnswer: "Yes",
     },
     {
         question: "What methods were used to diagnose for ADHD? (Check all that apply)",
         inputName: "diagnosedMethod",
         inputType: "checkbox",
         entry: "entry.63037250",
+        diagnosedADHDAnswer: "Yes",
     },
     {
         question: "Are you currently taking your ADHD medication regularly (more than 3 days/week in the past 2 weeks)?",
         inputName: "takingMedication",
         inputType: "radio",
         entry: "entry.844708561",
+        diagnosedADHDAnswer: "Yes",
     },
     {
         question: "Do you suspect you may have ADHD?",
         inputName: "suspectADHD",
         inputType: "radio",
         entry: "entry.1550574022",
+        diagnosedADHDAnswer: "No",
     },
     {
         question: "Why do you suspect you may have ADHD?",
         inputName: "whySuspectADHD",
         inputType: "textarea",
         entry: "entry.698666662",
+        diagnosedADHDAnswer: "No",
     }
 ]
 
@@ -442,24 +448,36 @@ function createButton(text, clickHandler) {
 let demographicsError = false;
 const submitButton = createButton("Submit", (e) => {
     demographicsError = false;
+    diagnosedADHDAnswer = false;
     const demographicsForm = document.getElementById("demographics");
     const demographicsEntries = demographicsQuestions.map(question => {
         if (question.inputType === "checkbox") {
             const inputs = Array.from(demographicsForm[question.inputName]);
-            return inputs.map(input => {
+            const inputVals = inputs.map(input => {
                 return input.checked ? `${question.entry}=${encodeURIComponent(input.value)}` : "";
             });
-        }
-        const input = demographicsForm[question.inputName];
-        if (input.value !== "__other_option__") 
-            return input.value ? `${question.entry}=${encodeURIComponent(input.value)}` : "";
-        const otherInput = demographicsForm[`${question.inputName}OtherInput`];
-        if (otherInput.value === "") {
-            alert(`Please fill in the "Other" field for the demographics question "${question.question}"`);
+            if (inputVals.some(val => val !== "") || (question.diagnosedADHDAnswer && question.diagnosedADHDAnswer !== diagnosedADHDAnswer))
+                return inputVals;
+            alert(`Please fill in the demographics question "${question.question}"`);
             demographicsError = true;
             return "";
         }
-        return `${question.entry}=${encodeURIComponent(input.value)}&${question.entry}.other_option_response=${encodeURIComponent(otherInput.value)}`;
+        const input = demographicsForm[question.inputName];
+        if (question.inputName === "diagnosedADHD")
+            diagnosedADHDAnswer = input.value === "__other_option__" ? "No" : input.value;
+        if (input.value !== "__other_option__") {
+            if (input.value || (question.diagnosedADHDAnswer && question.diagnosedADHDAnswer !== diagnosedADHDAnswer))
+                return `${question.entry}=${encodeURIComponent(input.value)}`;
+            alert(`Please fill in the demographics question "${question.question}"`);
+            demographicsError = true;
+            return "";
+        }
+        const otherInput = demographicsForm[`${question.inputName}OtherInput`];
+        if (otherInput.value !== "" || (question.diagnosedADHDAnswer && question.diagnosedADHDAnswer !== diagnosedADHDAnswer))
+            return `${question.entry}=${encodeURIComponent(input.value)}&${question.entry}.other_option_response=${encodeURIComponent(otherInput.value)}`;
+        alert(`Please fill in the "Other" field for the demographics question "${question.question}"`);
+        demographicsError = true;
+        return "";
     }).flat().filter(entry => entry !== "");
     if (demographicsError)
         return;
