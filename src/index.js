@@ -89,7 +89,6 @@ const moaQuestions = [
         entry: "entry.2051774930",
     },
 ];
-console.log(moaQuestions);
 
 const asrsQuestions = [
     {
@@ -373,10 +372,8 @@ function ignoreForm() {
         return;
 
     const moaForm = document.getElementById("moaForm");
-    console.log(moaForm);
     const moaEntries = moaQuestions.map(question => {
         const input = moaForm[question.inputName];
-        console.log(input, question.inputName);
         if (input.value !== "__other_option__") 
             return input.value ? `${question.entry}=${encodeURIComponent(input.value)}` : "";
         const otherInput = moaForm[`${question.inputName}OtherInput`];
