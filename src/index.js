@@ -272,6 +272,15 @@ const submitButton = createButton("Submit", (e) => {
         if (question.inputType === "checkbox") {
             const inputs = Array.from(demographicsForm[question.inputName]);
             return inputs.map(input => {
+                if (input.checked && input.value === "__other_option__") {
+                    const otherInput = demographicsForm[`${question.inputName}OtherInput`];
+                    if (otherInput.value === "") {
+                        alert(`Please fill in the "Other" field for the demographics question "${question.question}"`);
+                        demographicsError = true;
+                        return "";
+                    }
+                    return `${question.entry}=${encodeURIComponent(input.value)}&${question.entry}.other_option_response=${encodeURIComponent(otherInput.value)}`;
+                }
                 return input.checked ? `${question.entry}=${encodeURIComponent(input.value)}` : "";
             });
         }
@@ -344,7 +353,7 @@ function adhdDiagnosis(status) {
 
 function addInputRatioListeners() {
     for (const question of demographicsQuestions) {
-        if (question.inputType !== "radio")
+        if (question.inputType !== "radio" && question.inputType !== "checkbox")
             continue;
         const options = document.getElementsByName(question.inputName);
         options.forEach(option => {
