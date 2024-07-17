@@ -10,10 +10,12 @@
 <body>
     <div class="draft">DRAFT</div>
     <form id="moaForm">
-        <label for="moayob">Year of Birth:</label>
-        <input type="number" id="moayob" name="moayob" min="1900" max="2024">
-        <p>Gender Identity:</p>
-        <div class="flexbox">
+        <div class="moaQuestion">
+            <label for="moayob">Year of Birth:</label>
+            <input type="number" id="moayob" name="moayob" min="1900" max="2024">
+        </div>
+        <div class="moaQuestion">
+            <p>Gender Identity:</p>
             <div>
                 <input type="radio" name="moagender" id="male" value="Male">
                 <label for="male">Male</label>
@@ -31,8 +33,8 @@
                 <input type="text" id="moagenderOtherInput" name="moagenderOtherInput">
             </div>
         </div>
-        <p>Were they panelled?</p>
-        <div class="flexbox">
+        <div class="moaQuestion">
+            <p>Panelled?</p>
             <div>
                 <input type="radio" name="panelled" id="yesPanelled" value="Yes">
                 <label for="yesPanelled">Yes</label>
@@ -49,7 +51,7 @@
     </form>
     <div id="frontSection">
         <input id="declineButton" type="button" value="FOR CLINIC STAFF">
-        <h1>ADHD Research Form</h1>
+        <h1>ADHD Screening Survey</h1>
         <p><b>Title of the study:</b> Adult ADHD Self-Report Scale: version comparison</p>
         <p><b>Principal Investigator:</b><br>Dr. Roni Kraut<br>Assistant Professor, University of Alberta<br>780 248-1836</p>
         <p><b>Invitation to Participate:</b> You are invited to participate in this research study because you are attending an appointment at this medical clinic.</p>
