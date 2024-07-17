@@ -71,7 +71,25 @@ const demographicsQuestions = [
         entry: "entry.698666662",
         diagnosedADHDAnswer: "No",
     }
-]
+];
+
+const moaQuestions = [
+    {
+        ...demographicsQuestions[0],
+        inputName: `moa${demographicsQuestions[0].inputName}`,
+    },
+    {
+        ...demographicsQuestions[1],
+        inputName: `moa${demographicsQuestions[1].inputName}`,
+    },
+    {
+        question: "Were they panelled?",
+        inputName: "panelled",
+        inputType: "radio",
+        entry: "entry.2051774930",
+    },
+];
+console.log(moaQuestions);
 
 const asrsQuestions = [
     {
@@ -337,14 +355,41 @@ function addInputRatioListeners() {
                     adhdDiagnosis(e.target.value === "Yes" ? "diagnosed" : "undiagnosed");
             });
         });
-    } 
+    }
+    for (const question of moaQuestions) {
+        if (question.inputType !== "radio")
+            continue;
+        const options = document.getElementsByName(question.inputName);
+        options.forEach(option => {
+            option.addEventListener("change", (e) => {
+                toggleOtherInput(question.inputName, e.target.value === "__other_option__");
+            });
+        });
+    }
 }
 
 function ignoreForm() {
     if (!confirm("THIS IS ONLY FOR MEDICAL STAFF/ASSISTANTS.\n\nAre you sure you want to confirm form decline?"))
         return;
 
-    window.open(declinedUrl, "_blank").focus();
+    const moaForm = document.getElementById("moaForm");
+    console.log(moaForm);
+    const moaEntries = moaQuestions.map(question => {
+        const input = moaForm[question.inputName];
+        console.log(input, question.inputName);
+        if (input.value !== "__other_option__") 
+            return input.value ? `${question.entry}=${encodeURIComponent(input.value)}` : "";
+        const otherInput = moaForm[`${question.inputName}OtherInput`];
+        if (otherInput.value === "") {
+            alert(`Please fill in the "Other" field for the demographics question "${question.question}"`);
+            demographicsError = true;
+            return "";
+        }
+        return `${question.entry}=${encodeURIComponent(input.value)}&${question.entry}.other_option_response=${encodeURIComponent(otherInput.value)}`;
+    }).flat().filter(entry => entry !== "");
+
+    const url = `${declinedUrl}&${moaEntries.join("&")}`;
+    window.open(url, "_blank").focus();
     window.location.reload();
 }
 
@@ -352,7 +397,10 @@ document.addEventListener("DOMContentLoaded", () => {
     pageHandler(0);
 
     const declineButton = document.getElementById("declineButton");
-    declineButton.addEventListener("click", ignoreForm);
+    declineButton.addEventListener("click", () => document.getElementById("moaForm").style.display = "flex");
+    const [moaCancelButton, moaConfirmButton] = document.querySelectorAll("#moaForm button");
+    moaCancelButton.addEventListener("click", () => document.getElementById("moaForm").style.display = "none");
+    moaConfirmButton.addEventListener("click", ignoreForm);
 
     addInputRatioListeners();
     adhdDiagnosis(false);

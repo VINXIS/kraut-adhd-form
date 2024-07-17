@@ -9,6 +9,56 @@
 </head>
 <body>
     <div class="draft">DRAFT</div>
+    <form id="moaForm">
+        <label for="moayob">Year of Birth:</label>
+        <input type="number" id="moayob" name="moayob" min="1900" max="2024">
+        <p>Gender Identity:</p>
+        <div class="flexbox">
+            <div>
+                <input type="radio" name="moagender" id="male" value="Male">
+                <label for="male">Male</label>
+            </div>
+            <div>
+                <input type="radio" name="moagender" id="female" value="Female">
+                <label for="female">Female</label>
+            </div>
+            <div>
+                <input type="radio" name="moagender" id="nonbinary" value="Non-binary">
+                <label for="nonbinary">Non-binary</label>
+            </div>
+            <div>
+                <input type="radio" name="moagender" id="transgender" value="Transgender">
+                <label for="transgender">Transgender</label>
+            </div>
+            <div>
+                <input type="radio" name="moagender" id="noAnswerGender" value="Prefer not to answer">
+                <label for="noAnswerGender">Prefer not to answer</label>
+            </div>
+            <div>
+                <input type="radio" name="moagender" id="otherGender" value="__other_option__">
+                <label for="otherGender">Other</label>
+            </div>
+            <div id="moagenderInput" style="display: none;">
+                <label for="moagenderOtherInput">Please specify:</label>
+                <input type="text" id="moagenderOtherInput" name="moagenderOtherInput">
+            </div>
+        </div>
+        <p>Were they panelled?</p>
+        <div class="flexbox">
+            <div>
+                <input type="radio" name="panelled" id="yesPanelled" value="Yes">
+                <label for="yesPanelled">Yes</label>
+            </div>
+            <div>
+                <input type="radio" name="panelled" id="noPanelled" value="No">
+                <label for="noPanelled">No</label>
+            </div>
+        </div>
+        <div class="buttons">
+            <button id="moaCancel">Cancel</button>
+            <button id="moaSubmit">Submit</button>
+        </div>
+    </form>
     <div id="frontSection">
         <input id="declineButton" type="button" value="FOR CLINIC STAFF">
         <h1>ADHD Research Form</h1>
@@ -35,7 +85,7 @@
             <label for="yob">Year of Birth:</label>
             <input type="number" id="yob" name="yob" min="1900" max="2024">
             <hr>
-            <p>Gender Identity</p>
+            <p>Gender Identity:</p>
             <div class="flexbox">
                 <div>
                     <input type="radio" name="gender" id="male" value="Male">
@@ -67,7 +117,7 @@
                 </div>
             </div>
             <hr>
-            <p>Level of Education</p>
+            <p>Level of Education:</p>
             <div class="flexbox">
                 <div>
                     <input type="radio" name="education" id="highschool" value="High school diploma, or equivalent">
@@ -91,7 +141,7 @@
                 </div>
             </div>
             <hr>
-            <p>Ethnicity (if two or more please list in other)</p>
+            <p>Ethnicity (if two or more please list in other):</p>
             <div class="flexbox">
                 <div>
                     <input type="radio" name="ethnicity" id="caucasian" value="White">
@@ -243,6 +293,6 @@
         <h1>Adult ADHD Self-Report Scale</h1>
         <p>Please answer the questions below, rating yourself on each of the criteria shown using the scale on the right side of the page. Please answer all questions, and choose the response that best describes how you have felt and conducted yourself over the past 6 months.</p>
     </div>
-    <div id="buttons" />
+    <div id="buttons" class="buttons" />
 </body>
 </html>

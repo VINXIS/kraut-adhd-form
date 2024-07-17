@@ -57,15 +57,31 @@ td > input {
     transform: translate(-50%, -50%);
 }
 
+#moaForm {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.9);
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    display: none;
+    z-index: 2;
+}
+
 .flexbox {
     display: flex;
     flex-direction: column;
 }
 
-#buttons {
+.buttons {
     display: flex;
     justify-content: space-between;
     margin: 20px 0;
+    gap: 20px;
 }
 
 .partHeader {
