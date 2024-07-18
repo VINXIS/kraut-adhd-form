@@ -399,9 +399,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const declineButton = document.getElementById("declineButton");
     declineButton.addEventListener("click", () => document.getElementById("moaForm").style.display = "flex");
-    const [moaCancelButton, moaConfirmButton] = document.querySelectorAll("#moaForm button");
+    const [moaCancelButton, moaSubmitButton] = [document.getElementById("moaCancel"), document.getElementById("moaSubmit")];
     moaCancelButton.addEventListener("click", () => document.getElementById("moaForm").style.display = "none");
-    moaConfirmButton.addEventListener("click", ignoreForm);
+    moaSubmitButton.addEventListener("click", ignoreForm);
 
     addInputRatioListeners();
     adhdDiagnosis(false);
