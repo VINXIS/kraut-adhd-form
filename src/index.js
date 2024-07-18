@@ -83,10 +83,10 @@ const moaQuestions = [
         inputName: `moa${demographicsQuestions[1].inputName}`,
     },
     {
-        question: "Were they panelled?",
-        inputName: "panelled",
+        question: "Reason for no response",
+        inputName: "moareason",
         inputType: "radio",
-        entry: "entry.2051774930",
+        entry: "entry.1880234864",
     },
 ];
 

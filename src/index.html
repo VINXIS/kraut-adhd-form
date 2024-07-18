@@ -33,14 +33,30 @@
             </div>
         </div>
         <div class="moaQuestion">
-            <p>Panelled?</p>
+            <p>Reason for no response:</p>
             <div>
-                <input type="radio" name="panelled" id="yesPanelled" value="Yes">
-                <label for="yesPanelled">Yes</label>
+                <input type="radio" name="moareason" id="declined" value="Declined">
+                <label for="declined">Declined</label>
             </div>
             <div>
-                <input type="radio" name="panelled" id="noPanelled" value="No">
-                <label for="noPanelled">No</label>
+                <input type="radio" name="moareason" id="noTime" value="No time">
+                <label for="noTime">No time</label>
+            </div>
+            <div>
+                <input type="radio" name="moareason" id="languageBarrier" value="Language barrier">
+                <label for="languageBarrier">Language barrier</label>
+            </div>
+            <div>
+                <input type="radio" name="moareason" id="mentalCapacity" value="Mental capacity">
+                <label for="mentalCapacity">Mental capacity</label>
+            </div>
+            <div>
+                <input type="radio" name="moareason" id="otherReason" value="__other_option__">
+                <label for="otherReason">Other</label>
+            </div>
+            <div id="moareasonInput" style="display: none;">
+                <label for="moareasonOtherInput">Please specify:</label>
+                <input type="text" id="moareasonOtherInput" name="moareasonOtherInput">
             </div>
         </div>
         <div class="buttons">
