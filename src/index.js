@@ -243,11 +243,6 @@ function createAsrsForm() {
     table.appendChild(tbody);
     form.appendChild(table);
     div.appendChild(form);
-
-    // TODO: Delete this after development
-    // const typeDiv = document.createElement("div");
-    // typeDiv.innerText = `Form type: ${asrsFormType}`;
-    // div.appendChild(typeDiv);
 }
 
 const declinedUrl = `https://docs.google.com/forms/d/e/1FAIpQLScOIicBUGYizF1gb4vzxZVbZIBWUot4C8XQrafn0p0UP6zJIg/formResponse?usp=pp_url&submit=Submit&entry.1330571429=No`;
