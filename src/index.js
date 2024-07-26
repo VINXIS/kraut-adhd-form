@@ -18,10 +18,16 @@ const demographicsQuestions = [
         entry: "entry.128715196",
     },
     {
-        question: "Ethnicity",
+        question: "Ethnicity (if two or more please list in other)",
         inputName: "ethnicity",
         inputType: "radio",
         entry: "entry.104950939",
+    },
+    {
+        question: "Do you have a parent, sibling, or child that has been diagnosed with ADHD?",
+        inputName: "familyADHD",
+        inputType: "radio",
+        entry: "entry.1312805608",
     },
     {
         question: "Have you been diagnosed with ADHD?",

@@ -149,7 +149,7 @@
             <p>Ethnicity (if two or more please list in other):</p>
             <div class="flexbox">
                 <div>
-                    <input type="radio" name="ethnicity" id="caucasian" value="White">
+                    <input type="radio" name="ethnicity" id="white" value="White">
                     <label for="white">White</label>
                 </div>
                 <div>
@@ -179,6 +179,26 @@
                 <div id="ethnicityInput" style="display: none;">
                     <label for="ethnicityOtherInput">Please specify:</label>
                     <input type="text" id="ethnicityOtherInput" name="ethnicityOtherInput">
+                </div>
+            </div>
+            <hr>
+            <p>Do you have a parent, sibling, or child that has been diagnosed with ADHD?</p>
+            <div class="flexbox">
+                <div>
+                    <input type="radio" name="familyADHD" id="yesFamily" value="Yes">
+                    <label for="yesFamily">Yes</label>
+                </div>
+                <div>
+                    <input type="radio" name="familyADHD" id="noFamily" value="No">
+                    <label for="noFamily">No</label>
+                </div>
+                <div>
+                    <input type="radio" name="familyADHD" id="otherFamily" value="__other_option__">
+                    <label for="otherFamily">Other</label>
+                </div>
+                <div id="familyADHDInput" style="display: none;">
+                    <label for="familyADHDOtherInput">Please specify:</label>
+                    <input type="text" id="familyADHDOtherInput" name="familyADHDOtherInput">
                 </div>
             </div>
             <hr>
