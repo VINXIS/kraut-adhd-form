@@ -196,14 +196,7 @@ const asrsFormTypes = [
     "random",
     "randomNoHighlight",
 ];
-const asrsFormOrderFunctions = {
-    "normal": (asrsQuestions) => asrsQuestions,
-    "noHighlight": (asrsQuestions) => asrsQuestions,
-    "random": (asrsQuestions) => [...asrsQuestions].sort(() => Math.random() - 0.5),
-    "randomNoHighlight": (asrsQuestions) => [...asrsQuestions].sort(() => Math.random() - 0.5),
-}
 const asrsFormType = asrsFormTypes[Math.floor(Math.random() * asrsFormTypes.length)];
-const asrsOrderedQuestions = asrsFormOrderFunctions[asrsFormType]([...asrsQuestions]);
 function createAsrsForm() {
     const div = document.getElementById("asrsForm");
     const form = document.createElement("form");
@@ -222,8 +215,8 @@ function createAsrsForm() {
 
     const tbody = document.createElement("tbody");
 
-    asrsOrderedQuestions.forEach((question, i) => {
-        if (i === asrsPartALength)
+    asrsQuestions.forEach((question, i) => {
+        if (i === asrsPartALength && (asrsFormType === "normal" || asrsFormType === "noHighlight"))
             appendPartHeader(tbody, "Part A");
         const tr = document.createElement("tr");
         const th = document.createElement("th");
@@ -245,7 +238,8 @@ function createAsrsForm() {
 
         tbody.appendChild(tr);
     });
-    appendPartHeader(tbody, "Part B");
+    if (asrsFormType === "normal" || asrsFormType === "noHighlight")
+        appendPartHeader(tbody, "Part B");
     table.appendChild(tbody);
     form.appendChild(table);
     div.appendChild(form);
@@ -305,7 +299,7 @@ const submitButton = createButton("Submit", (e) => {
     const entries = [
         ...demographicsEntries,
         ...asrsSelected.map((input, i) => {
-            const question = asrsOrderedQuestions[i];
+            const question = asrsQuestions[i];
             return `${question.entry}=${encodeURIComponent(asrsQuestionOptions[input.value])}`;
         }),
     ];
