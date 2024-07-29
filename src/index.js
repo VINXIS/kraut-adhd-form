@@ -338,7 +338,8 @@ function pageHandler(number) {
 
 function toggleOtherInput(inputName, toggle) {
     const otherInput = document.getElementById(`${inputName}Input`);
-    otherInput.style.display = toggle ? "block" : "none";
+    if (otherInput)
+        otherInput.style.display = toggle ? "block" : "none";
 }
 
 function adhdDiagnosis(status) {
@@ -356,6 +357,8 @@ function addInputRatioListeners() {
                 toggleOtherInput(question.inputName, e.target.value === "__other_option__");
                 if (question.inputName === "diagnosedADHD")
                     adhdDiagnosis(e.target.value === "Yes" ? "diagnosed" : "undiagnosed");
+                if (question.inputName === "suspectADHD")
+                    document.getElementById("whyADHD").style.display = e.target.value === "Likely" || e.target.value === "Very likely" ? "flex" : "none";
             });
         });
     }
