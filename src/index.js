@@ -94,6 +94,12 @@ const moaQuestions = [
         inputType: "radio",
         entry: "entry.1880234864",
     },
+    {
+        question: "Reason unable to complete",
+        inputName: "moareason2",
+        inputType: "radio",
+        entry: "entry.268756582",
+    },
 ];
 
 const asrsQuestions = [
@@ -368,6 +374,8 @@ function addInputRatioListeners() {
         const options = document.getElementsByName(question.inputName);
         options.forEach(option => {
             option.addEventListener("change", (e) => {
+                if (question.inputName === "moareason")
+                    document.getElementById("unableToComplete").style.display = e.target.value === "Unable to Complete" ? "flex" : "none";
                 toggleOtherInput(question.inputName, e.target.value === "__other_option__");
             });
         });
@@ -381,14 +389,11 @@ function ignoreForm() {
     const moaForm = document.getElementById("moaForm");
     const moaEntries = moaQuestions.map(question => {
         const input = moaForm[question.inputName];
+        if (question.inputName === "moareason2" && moaForm["moareason"].value !== "Unable to Complete")
+            return "";
         if (input.value !== "__other_option__") 
             return input.value ? `${question.entry}=${encodeURIComponent(input.value)}` : "";
         const otherInput = moaForm[`${question.inputName}OtherInput`];
-        if (otherInput.value === "") {
-            alert(`Please fill in the "Other" field for the demographics question "${question.question}"`);
-            demographicsError = true;
-            return "";
-        }
         return `${question.entry}=${encodeURIComponent(input.value)}&${question.entry}.other_option_response=${encodeURIComponent(otherInput.value)}`;
     }).flat().filter(entry => entry !== "");
 

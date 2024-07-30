@@ -39,24 +39,31 @@
                 <label for="declined">Declined</label>
             </div>
             <div>
-                <input type="radio" name="moareason" id="noTime" value="No time">
+                <input type="radio" name="moareason" id="unable" value="Unable to Complete">
+                <label for="noTime">Unable to Complete</label>
+            </div>
+        </div>
+        <div class="moaQuestion" id="unableToComplete" style="display: none;">
+            <p>Reason unable to complete:</p>
+            <div>
+                <input type="radio" name="moareason2" id="noTime" value="No time">
                 <label for="noTime">No time</label>
             </div>
             <div>
-                <input type="radio" name="moareason" id="languageBarrier" value="Language barrier">
+                <input type="radio" name="moareason2" id="languageBarrier" value="Language barrier">
                 <label for="languageBarrier">Language barrier</label>
             </div>
             <div>
-                <input type="radio" name="moareason" id="mentalCapacity" value="Mental capacity">
+                <input type="radio" name="moareason2" id="mentalCapacity" value="Mental capacity">
                 <label for="mentalCapacity">Mental capacity</label>
             </div>
             <div>
-                <input type="radio" name="moareason" id="otherReason" value="__other_option__">
+                <input type="radio" name="moareason2" id="otherReason" value="__other_option__">
                 <label for="otherReason">Other</label>
             </div>
-            <div id="moareasonInput" style="display: none;">
-                <label for="moareasonOtherInput">Please specify:</label>
-                <input type="text" id="moareasonOtherInput" name="moareasonOtherInput">
+            <div id="moareason2Input" style="display: none;">
+                <label for="moareason2OtherInput">Please specify:</label>
+                <input type="text" id="moareason2OtherInput" name="moareason2OtherInput">
             </div>
         </div>
         <div class="buttons">
