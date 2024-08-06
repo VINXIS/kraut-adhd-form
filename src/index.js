@@ -406,7 +406,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
     const clinicName = urlParams.get("clinic");
     if (!clinicName) {
-        document.body.innerHTML = `<h1>Invalid URL. Please make sure the URL contains the clinic name, for example: https://kraut-adhd-form.vercel.app?clinic=clinicName</h1><br>Current URL: ${window.location.href}<br>Typical clinic names are: "Shifa", "Devon", "Red Deer".<br>Example: ${window.location.href}?clinic=Shifa`;
+        document.body.innerHTML = `<h1>Invalid URL. Please make sure the URL contains the clinic name, for example: https://kraut-adhd-form.vercel.app?clinic=clinicName</h1><br>Current URL: ${window.location.href}<br>Typical clinic names are: "Shifa", "Devon", "RedDeer".<br>Example: ${window.location.href}?clinic=Shifa`;
         return;
     }
     baseUrl += `&entry.2112691942=${clinicName}`;
