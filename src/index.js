@@ -251,8 +251,8 @@ function createAsrsForm() {
     div.appendChild(form);
 }
 
-const declinedUrl = `https://docs.google.com/forms/d/e/1FAIpQLScOIicBUGYizF1gb4vzxZVbZIBWUot4C8XQrafn0p0UP6zJIg/formResponse?usp=pp_url&submit=Submit&entry.1330571429=No`;
-const baseUrl = `https://docs.google.com/forms/d/e/1FAIpQLScOIicBUGYizF1gb4vzxZVbZIBWUot4C8XQrafn0p0UP6zJIg/formResponse?usp=pp_url&submit=Submit&entry.1330571429=Yes&entry.667455850=${asrsFormType}`;
+let declinedUrl = `https://docs.google.com/forms/d/e/1FAIpQLScOIicBUGYizF1gb4vzxZVbZIBWUot4C8XQrafn0p0UP6zJIg/formResponse?usp=pp_url&submit=Submit&entry.1330571429=No`;
+let baseUrl = `https://docs.google.com/forms/d/e/1FAIpQLScOIicBUGYizF1gb4vzxZVbZIBWUot4C8XQrafn0p0UP6zJIg/formResponse?usp=pp_url&submit=Submit&entry.1330571429=Yes&entry.667455850=${asrsFormType}`;
 
 const clicks = [{ p: -1, q: -1, a: -1, c: -1, x: -1, y: -1, d: new Date() }];
 const clickEntry = "entry.1947159382";
@@ -403,6 +403,15 @@ function ignoreForm() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const clinicName = urlParams.get("clinic");
+    if (!clinicName) {
+        document.body.innerHTML = `<h1>Invalid URL. Please make sure the URL contains the clinic name, for example: https://kraut-adhd-form.vercel.app?clinic=clinicName</h1><br>Current URL: ${window.location.href}<br>Typical clinic names are: "Shifa", "Devon", "Red Deer".<br>Example: ${window.location.href}?clinic=Shifa`;
+        return;
+    }
+    baseUrl += `&entry.2112691942=${clinicName}`;
+    declinedUrl += `&entry.2112691942=${clinicName}`;
+
     pageHandler(0);
 
     const declineButton = document.getElementById("declineButton");
