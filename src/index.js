@@ -213,7 +213,9 @@ function createAsrsForm() {
     ["Questions", ...asrsQuestionOptions].forEach(text => {
         const th = document.createElement("th");
         th.scope = "col";
-        th.innerText = text;
+        const div = document.createElement("div");
+        div.innerText = text;
+        th.appendChild(div);
         tr.appendChild(th);
     });
     thead.appendChild(tr);
